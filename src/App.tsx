@@ -14,20 +14,31 @@ import {
   X,
   Compass,
   ChevronRight,
+  Users,
+  BookOpen,
+  CircleUserRound,
 } from "lucide-react";
 import TravelMap from "./components/TravelMap";
 import { BackupPanel, ExportMap, ShareApp } from "./components/Sharing";
 import PlaceSheet, { palette } from "./components/PlaceSheet";
-import { useTravel } from "./hooks/useTravel";
+import {useAccount} from "./collaboration/useAccount";
+import {useFriends} from "./collaboration/useFriends";
+import {collaborationMessages} from "./collaboration/i18n";
+import AccountPanel from "./collaboration/AccountPanel";
+import FriendsPanel,{invitationToken} from "./collaboration/FriendsPanel";
+import {cloud} from "./collaboration/cloud";
 import { messages } from "./data/i18n";
 import { searchPlaces, placesFor } from "./data/catalog";
 import { colorFor, isVisited, statistics } from "./services/travel";
 import type { MapMode, Place } from "./types";
-type Page = "map" | "places" | "statistics" | "settings";
+type Page = "map" | "places" | "statistics" | "settings" | "friends" | "journal";
 export default function App() {
-  const { data, error, saving, update, retry, replace } = useTravel();
+  const account=useAccount();
+  const { data, error, saving, update, retry, replace } = account;
+  const shared=useFriends(account.session?.user.id);
+  const [profileOpen,setProfileOpen]=useState(false);
   const [mode, setMode] = useState<MapMode>("world");
-  const [page, setPage] = useState<Page>("map");
+  const [page, setPage] = useState<Page>(invitationToken()?"friends":"map");
   const [selected, setSelected] = useState<Place>();
   const [query, setQuery] = useState("");
   const [onlyVisited, setOnlyVisited] = useState(false);
@@ -52,21 +63,21 @@ export default function App() {
     document.documentElement.lang =
       data?.preferences.language === "zh" ? "zh-CN" : "en";
   }, [data?.preferences.language]);
-  if (!data)
+  if (!account.ready||!data)
     return (
       <div className="loading-screen">
         <Globe2 size={40} />
         <h1>Our Little World</h1>
         <p>
-          {error
+          {account.cloudError|| (error
             ? "Unable to open local storage. Enable browser storage and retry."
-            : "Opening your little world…"}
+            : "Opening your little world…")}
         </p>
-        {error && <button onClick={retry}>Retry</button>}
+        {(error||account.cloudError)&&<button onClick={()=>account.session?void account.sync():retry()}>Retry</button>}{account.session&&<button onClick={()=>void cloud?.signOut()}>Sign out</button>}
       </div>
     );
   const lang = data.preferences.language,
-    t = messages[lang],
+    t = {...messages[lang],...collaborationMessages[lang]},
     stats = statistics(data, mode),
     world = statistics(data, "world"),
     china = statistics(data, "china");
@@ -165,7 +176,7 @@ export default function App() {
           className="desktop-nav"
           aria-label={lang === "en" ? "Main navigation" : "主导航"}
         >
-          {(["map", "places", "statistics", "settings"] as Page[]).map((p) => (
+          {(["map", "journal", "statistics", "friends"] as Page[]).map((p) => (
             <button
               className={page === p ? "active" : ""}
               key={p}
@@ -195,6 +206,7 @@ export default function App() {
           <Languages size={17} />
           <span>{lang === "en" ? "中文" : "EN"}</span>
         </button>
+        <div className="profile-menu"><button className="icon-button" aria-label={t.account} aria-expanded={profileOpen} onClick={()=>setProfileOpen(!profileOpen)}><CircleUserRound size={21}/></button>{profileOpen&&<div className="profile-popover"><span>{account.session?data.profile.displayName:t.localMode}</span><button onClick={()=>{setPage("settings");setProfileOpen(false)}}><Settings size={16}/>{t.settings}</button></div>}</div>
       </header>
       {!online && <div className="offline-banner">{t.offlineNow}</div>}
       {error && (
@@ -227,6 +239,7 @@ export default function App() {
               <div className="map-toolbar">
                 {modes}
                 {search}
+                <button className="text-button browse-button" onClick={()=>setPage('places')}>{t.browsePlaces}</button>
               </div>
               <div className="map-stage">
                 <TravelMap
@@ -446,6 +459,8 @@ export default function App() {
             </section>
           </>
         )}
+        {page==='friends'&&<FriendsPanel userId={account.session?.user.id} language={lang} shared={shared} onSignIn={()=>setPage('settings')}/>}
+        {page==='journal'&&<section className="content-card"><h3>{t.journal}</h3><p>{t.privateJournal}</p></section>}
         {page === "settings" && (
           <>
             <section className="page-heading">
@@ -456,13 +471,14 @@ export default function App() {
               </div>
             </section>
             <div className="settings-grid">
-              <BackupPanel
+              <AccountPanel account={account}/>
+              {!account.session&&<BackupPanel
                 data={data}
                 replace={(d) => {
                   replace(d);
                   setMode(d.preferences.defaultMap);
                 }}
-              />
+              />}
               <section className="content-card">
                 <h3>
                   <Settings size={20} />
@@ -555,17 +571,11 @@ export default function App() {
       <footer className="app-footer">
         <span>
           <ShieldCheck size={14} />
-          {t.private}
+          {account.session?t.privateJournal:t.private}
         </span>
         <span>
           <span className={`status-dot ${saving ? "saving" : ""}`} />
-          {error
-            ? lang === "en"
-              ? "Not saved"
-              : "未保存"
-            : saving
-              ? t.saving
-              : t.saved}
+          {account.session?(account.syncing?t.syncing:account.cloudError?t.syncError:account.pending.length?`${account.pending.length} ${t.pending}`:account.lastSync?t.synced:t.cached):error?(lang==='en'?'Not saved':'未保存'):saving?t.saving:t.saved}
         </span>
       </footer>
       <nav
@@ -575,9 +585,9 @@ export default function App() {
         {(
           [
             { page: "map", Icon: MapIcon },
-            { page: "places", Icon: MapPin },
+            { page: "journal", Icon: BookOpen },
             { page: "statistics", Icon: ChartNoAxesCombined },
-            { page: "settings", Icon: Settings },
+            { page: "friends", Icon: Users },
           ] as const
         ).map(({ page: p, Icon }) => (
           <button

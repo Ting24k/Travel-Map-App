@@ -1,0 +1,14 @@
+name: Database authorization
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  authorization:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - name: Exercise production migrations and RLS on PostgreSQL 17
+        run: node scripts/test-security.mjs
