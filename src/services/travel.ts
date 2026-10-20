@@ -1,4 +1,4 @@
-import { placesFor, placeById } from "../data/catalog";
+import { placesFor } from "../data/catalog";
 import type { TravelData, Place, MapMode, Language } from "../types";
 export const defaults = {
   language: "en" as Language,
@@ -19,18 +19,18 @@ export function emptyData(): TravelData {
     preferences: { ...defaults },
   };
 }
+export function statusFor(data:TravelData,id:string):import("../collaboration/types").TravelStatus {
+ const row=data.records?.find(r=>r.user_id===data.profile.id&&r.place_id===id);
+ return row?.status || (data.visits.some(v=>v.userId===data.profile.id&&v.placeId===id&&v.visited)?"visited":"unvisited");
+}
 export function manualVisited(data: TravelData, id: string) {
+ if(data.records?.some(r=>r.place_id===id&&r.user_id===data.profile.id))return ["visited","lived"].includes(statusFor(data,id));
   return data.visits.some(
     (v) => v.userId === data.profile.id && v.placeId === id && v.visited,
   );
 }
 export function derivedChina(data: TravelData) {
-  return data.visits.some(
-    (v) =>
-      v.userId === data.profile.id &&
-      v.visited &&
-      placeById.get(v.placeId)?.type === "china_province",
-  );
+  return placesFor("china").some(p=>manualVisited(data,p.id));
 }
 export function isVisited(data: TravelData, id: string) {
   return (
@@ -38,10 +38,11 @@ export function isVisited(data: TravelData, id: string) {
   );
 }
 export function colorFor(data: TravelData, id: string) {
-  return isVisited(data, id)
+  const status=statusFor(data,id);
+  return isVisited(data, id)||status==="wishlist"
     ? data.appearances.find(
         (a) => a.userId === data.profile.id && a.placeId === id,
-      )?.customColor || data.preferences.defaultVisitedColor
+      )?.customColor || (status==="wishlist"?"#d5ba79":status==="lived"?"#aa9bc1":data.preferences.defaultVisitedColor)
     : "#dedfd5";
 }
 export function setVisit(
@@ -51,6 +52,7 @@ export function setVisit(
 ): TravelData {
   return {
     ...data,
+    ...(data.records?{records:data.records.map(r=>r.place_id===place.id?{...r,status:visited?"visited" as const:"unvisited" as const}:r)}:{}),
     visits: [
       ...data.visits.filter((v) => v.placeId !== place.id),
       {
@@ -70,6 +72,7 @@ export function setColor(
 ): TravelData {
   return {
     ...data,
+    ...(data.records?{records:data.records.map(r=>r.place_id===id?{...r,custom_color:color||null}:r)}:{}),
     appearances: [
       ...data.appearances.filter((a) => a.placeId !== id),
       ...(color
@@ -86,4 +89,10 @@ export function statistics(data: TravelData, mode: MapMode) {
     total: all.length,
     percent: all.length ? (count / all.length) * 100 : 0,
   };
+}
+
+export function setStatus(data:TravelData,place:Place,status:import("../collaboration/types").TravelStatus):TravelData {
+ const updated=setVisit(data,place,status==="visited"||status==="lived");
+ const old=data.records?.find(r=>r.place_id===place.id);
+ return {...updated,schemaVersion:2,records:[...(data.records||[]).filter(r=>r.place_id!==place.id),{user_id:data.profile.id,place_id:place.id,status,custom_color:data.appearances.find(a=>a.placeId===place.id)?.customColor||null,revision:old?.revision||0,updated_at:new Date().toISOString()}]};
 }
