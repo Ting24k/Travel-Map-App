@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Globe2, Map as MapIcon, MapPin, ChartNoAxesCombined, Settings, Search, Check, ArrowUpRight, Leaf, ShieldCheck, Languages, X, Compass, ChevronRight, Users, BookOpen, CircleUserRound, } from "lucide-react";
+import { Globe2, Map as MapIcon, MapPin, ChartNoAxesCombined, Settings, Search, Check, ArrowUpRight, Leaf, ShieldCheck, Languages, X, Compass, ChevronRight, Users, BookOpen, CircleUserRound,List, } from "lucide-react";
 import TravelMap from "./components/TravelMap";
 import { BackupPanel, ExportMap, ShareApp } from "./components/Sharing";
 import PlaceSheet, { palette } from "./components/PlaceSheet";
@@ -173,9 +173,9 @@ export default function App() {
               <div className="map-toolbar">
                 {modes}
                 {search}
-                <button className="text-button browse-button" onClick={() => setPage('places')}>{t.browsePlaces}</button>
+                <button className="text-button browse-button" aria-label={t.browsePlaces} onClick={() => setPage('places')}><List size={16}/><span>{t.browsePlaces}</span></button>
               </div>
-              <ComparisonControls language={lang} view={view} onView={v => { setView(v); setSelected(undefined); }} friends={shared.friends} selected={shared.selectedId} onSelect={shared.setSelectedId} friendData={shared.friendData} loading={shared.loading} onConnect={() => setPage('friends')}/>
+              <ComparisonControls language={lang} view={view} onView={v => { setView(v); setSelected(undefined); }} friends={shared.friends} selected={shared.selectedId} onSelect={shared.setSelectedId} friendData={shared.friendData} loading={shared.loading}/>
               <div className="map-stage">
                 <TravelMap mode={mode} language={lang} selected={selected?.id} onSelect={setSelected} colorFor={(id) => viewColor(data, shared.friendData, view, id)} visited={visibleVisited}/>
                 <div className="map-progress">
