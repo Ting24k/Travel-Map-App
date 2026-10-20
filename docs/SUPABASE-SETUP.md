@@ -70,7 +70,7 @@ Restart Vite after changing build variables. Run `npm run dev`, then open **Acco
 1. On the **original browser and origin** where you marked places, export its local JSON backup before upgrading or moving domains.
 2. Sign into the new account, open **Account → Settings → Bring your local memories**.
 3. Download **Back up original local data**. Choose **Preview local import**, or select a validated backup from another device.
-4. Review every place and status. Existing cloud records are kept by default. Only check the replacement option if you intend to replace matching cloud records.
+4. Review every place and status. Existing cloud records are kept by default, including records that arrive while the preview is open. Resolve or finish matching pending edits before requesting replacement. Only check the replacement option if you intend to replace matching cloud records.
 5. Confirm import. Imported place colors are preserved, including the original default appearance. Cloud preferences are kept. Journals receive deterministic account-scoped IDs. The original local database is not erased or reassigned.
 6. Wait for **Synced with cloud** and resolve any conflicts. “Queued” or “saved on device” is not confirmation of cloud storage. Then sign into the same account on another device to verify the result.
 7. If anything is wrong, sign out and restore the original JSON through local backup restore. You can review/import it again as a deliberate operation; the exact same source cannot be accidentally queued repeatedly for the same account. Cloud data is not automatically rolled back; undo through reviewed edits or a new explicit import.

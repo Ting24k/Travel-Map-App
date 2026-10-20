@@ -74,6 +74,7 @@ export default function App() {
       </div>);
     const lang = data.preferences.language, t = { ...messages[lang], ...collaborationMessages[lang] }, stats = statistics(data, mode), world = statistics(data, "world"), china = statistics(data, "china");
     const pair = pairStatistics(data, shared.friendData, mode);
+    const syncLabel=account.session?(saving?t.saving:account.cloudError?t.syncError:account.pending.length?`${account.pending.length} ${t.pending}`:!online?t.cached:account.syncing?t.syncing:account.lastSync?t.synced:t.cached):error?(lang==='en'?'Not saved':'未保存'):saving?t.saving:t.saved;
     const viewCount = view === 'mine' ? pair.mine : view === 'friend' ? pair.friend : pair.both;
     const visibleVisited = (id: string) => view === 'mine' ? isVisited(data, id) : view === 'friend' ? !!shared.friendData && isVisited(shared.friendData, id) : view === 'both' ? !!shared.friendData && isVisited(data, id) && isVisited(shared.friendData, id) : isVisited(data, id) || !!shared.friendData && isVisited(shared.friendData, id);
     const results = searchPlaces(query, mode).filter((p) => page !== "places" || ((!onlyVisited || isVisited(data, p.id)) && (statusFilter === 'all' || effectiveStatus(data, p.id) === statusFilter)));
@@ -191,6 +192,7 @@ export default function App() {
                     <small>
                       {mode === "world" ? t.countries : t.regions} · {t.visited}
                     </small>
+                    <small className="map-sync-status"><span className="status-dot"/> {syncLabel}</small>
                   </div>
                 </div>
               </div>
@@ -434,7 +436,7 @@ export default function App() {
         </span>
         <span>
           <span className={`status-dot ${saving ? "saving" : ""}`}/>
-          {account.session ? (account.syncing ? t.syncing : account.cloudError ? t.syncError : account.pending.length ? `${account.pending.length} ${t.pending}` : account.lastSync ? t.synced : t.cached) : error ? (lang === 'en' ? 'Not saved' : '未保存') : saving ? t.saving : t.saved}
+          {syncLabel}
         </span>
       </footer>
       <nav className="mobile-nav" aria-label={lang === "en" ? "Main navigation" : "主导航"}>

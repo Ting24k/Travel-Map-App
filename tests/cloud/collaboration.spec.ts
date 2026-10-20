@@ -75,6 +75,10 @@ test('two accounts, second device, migration, invitation, read-only comparison, 
         await a2.getByRole('button', { name: 'Refresh', exact: true }).click();
         await nav(a2, 'Journal');
         await expect(a2.locator('.journal-list')).toContainText('Private Alice memory');
+        await a2.locator('.journal-list article').first().getByRole('button',{name:'Edit trip'}).click();
+        await page.locator('.journal-list article').first().getByRole('button',{name:'Edit trip'}).click();await page.getByRole('textbox',{name:'Notes',exact:true}).fill('Newer server memory');await page.getByRole('button',{name:'Save trip',exact:true}).click();await expect.poll(()=>[...api.users.get(ids.a)!.entries.values()][0].note).toBe('Newer server memory');
+        await a2.evaluate(()=>window.dispatchEvent(new Event('focus')));await expect(a2.locator('.journal-list')).toContainText('Newer server memory');await a2.getByRole('textbox',{name:'Notes',exact:true}).fill('Older draft choice');await a2.getByRole('button',{name:'Save trip',exact:true}).click();await settings(a2);await expect(a2.locator('.conflict-card')).toBeVisible();expect([...api.users.get(ids.a)!.entries.values()][0].note).toBe('Newer server memory');await a2.getByRole('button',{name:'Use cloud version'}).click();await expect(a2.locator('.conflict-card')).toHaveCount(0);
+
         await a2.evaluate(async () => { await navigator.serviceWorker.ready; if (!navigator.serviceWorker.controller)
             await new Promise(r => navigator.serviceWorker.addEventListener('controllerchange', r, { once: true })); });
         await ca2.setOffline(true);

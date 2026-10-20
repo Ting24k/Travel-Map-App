@@ -15,6 +15,8 @@ export function useAccount() {
     const [cloudError, setCloudError] = useState('');
     const [ready, setReady] = useState(false);
     const [lastSync, setLastSync] = useState<string>();
+    const [writing,setWriting]=useState(false);
+    const writingCounts=useRef(new Map<string,number>());
     const active = useRef<string | undefined>(undefined), engine = useRef<SyncEngine | undefined>(undefined), latest = useRef<TravelData | undefined>(undefined);
     const writes = useRef(Promise.resolve());
     const reload = useCallback(async (userId: string) => { const [snapshot, ops] = await Promise.all([accountCache.snapshot(userId), accountCache.pending(userId)]); if (active.current !== userId)
@@ -58,6 +60,7 @@ export function useAccount() {
         setCloudError('');
         setLastSync(undefined);
         setSyncing(false);
+        setWriting((writingCounts.current.get(id||'')||0)>0);
         engine.current = id ? new SyncEngine(accountCache, cloud!, id) : undefined;
     } setSession(s); if (id)
         void reload(id).catch(e => setCloudError(String(e))); }; cloud.onSession = change; cloud!.recover().then(s => change(s)).catch(e => setCloudError((e as Error).message)).finally(() => { if (!disposed)
@@ -79,17 +82,17 @@ export function useAccount() {
         local.update(fn);
         return;
     } const id = active.current, before = latest.current; if (!id || !before)
-        return; const next = fn(before); latest.current = next; setCloudData(next); setCloudError(''); writes.current = writes.current.catch(() => { }).then(async () => { const a = new Map(recordsFromData(before).map(r => [r.place_id, r])); for (const r of recordsFromData(next)) {
+        return; const next = fn(before);writingCounts.current.set(id,(writingCounts.current.get(id)||0)+1);setWriting(true); latest.current = next; setCloudData(next); setCloudError(''); writes.current = writes.current.catch(() => { }).then(async () => { const a = new Map(recordsFromData(before).map(r => [r.place_id, r])); for (const r of recordsFromData(next)) {
         const old = a.get(r.place_id);
         if (!old || old.status !== r.status || old.custom_color !== r.custom_color)
-            await accountCache.queue(id, 'place', r.place_id, { status: r.status, custom_color: r.custom_color });
+            await accountCache.queue(id, 'place', r.place_id, { status: r.status, custom_color: r.custom_color },old?.revision??0);
     } if (JSON.stringify(before.preferences) !== JSON.stringify(next.preferences) || before.profile.displayName !== next.profile.displayName)
-        await accountCache.queue(id, 'profile', id, { display_name: next.profile.displayName, preferences: next.preferences }); const oldEntries = new Map((before.entries || []).map(e => [e.id, e])); for (const e of next.entries || []) {
+        await accountCache.queue(id, 'profile', id, { display_name: next.profile.displayName, preferences: next.preferences },before.profile.revision??0); const oldEntries = new Map((before.entries || []).map(e => [e.id, e])); for (const e of next.entries || []) {
         validateEntry(e);
         if (JSON.stringify(oldEntries.get(e.id)) !== JSON.stringify(e))
-            await accountCache.queue(id, 'journal', e.id, journalPayload(e));
+            await accountCache.queue(id, 'journal', e.id, journalPayload(e),e.revision);
     } if (latest.current === next)
-        await reload(id); }).then(() => { void sync(); }).catch(e => setCloudError((e as Error).message)); }
+        await reload(id); }).then(() => { void sync(); }).catch(e => {if(active.current===id)setCloudError((e as Error).message)}).finally(()=>{writingCounts.current.set(id,Math.max(0,(writingCounts.current.get(id)||0)-1));if(active.current===id)setWriting((writingCounts.current.get(id)||0)>0)}); }
     function saveEntry(entry: TravelEntry) { validateEntry(entry); update(d => ({ ...d, schemaVersion: 2, entries: [...(d.entries || []).filter(e => e.id !== entry.id), entry] })); }
     async function resolve(op: PendingOperation, keepMine: boolean) { try {
         await accountCache.resolve(op, keepMine);
@@ -99,5 +102,5 @@ export function useAccount() {
     catch (e) {
         setCloudError((e as Error).message);
     } }
-    return { ...local, data: session ? cloudData : local.data, localData: local.data, ready, session, configured: !!cloud, pending, syncing, lastSync, cloudError, sync, update, saveEntry, resolve, reload, replace: local.replace };
+    return { ...local, saving:session?writing:local.saving, data: session ? cloudData : local.data, localData: local.data, ready, session, configured: !!cloud, pending, syncing, lastSync, cloudError, sync, update, saveEntry, resolve, reload, replace: local.replace };
 }

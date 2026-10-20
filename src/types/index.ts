@@ -5,6 +5,7 @@ export interface UserProfile {
   id: string;
   displayName: string;
   createdAt: string;
+  revision?: number;
 }
 export interface Place {
   id: string;

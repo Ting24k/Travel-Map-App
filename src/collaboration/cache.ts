@@ -25,11 +25,11 @@ export class AccountCache extends Dexie {
     }, string>;
     constructor(name = 'our-little-world-accounts') { super(name); this.version(1).stores({ rows: '[userId+kind+entityId],userId', outbox: '[userId+kind+entityId],userId', migrations: '[userId+fingerprint]', auth: 'key' }); }
     async pending(userId: string) { return this.outbox.where('userId').equals(userId).toArray(); }
-    async queue(userId: string, kind: EntityKind, entityId: string, payload: Record<string, unknown>) { await this.transaction('rw', this.rows, this.outbox, async () => { const key: [
+    async queue(userId: string, kind: EntityKind, entityId: string, payload: Record<string, unknown>, expectedRevision?:number) { await this.transaction('rw', this.rows, this.outbox, async () => { const key: [
         string,
         EntityKind,
         string
-    ] = [userId, kind, entityId], previous = await this.outbox.get(key), base = await this.rows.get(key); await this.outbox.put({ userId, kind, entityId, id: crypto.randomUUID(), baseRevision: previous?.baseRevision ?? base?.row.revision ?? 0, payload, ...(previous && 'conflict' in previous ? { conflict: previous.conflict } : {}) }); }); }
+    ] = [userId, kind, entityId], previous = await this.outbox.get(key), base = await this.rows.get(key); await this.outbox.put({ userId, kind, entityId, id: crypto.randomUUID(), baseRevision: previous?.baseRevision ?? expectedRevision ?? base?.row.revision ?? 0, payload, ...(previous && 'conflict' in previous ? { conflict: previous.conflict } : {}) }); }); }
     async acceptSnapshot(userId: string, s: AccountSnapshot) { await this.transaction('rw', this.rows, async () => { await this.rows.where('userId').equals(userId).delete(); await this.rows.bulkPut([{ userId, kind: 'profile', entityId: userId, row: s.profile }, ...s.records.map(row => ({ userId, kind: 'place' as const, entityId: row.place_id, row })), ...s.entries.map(row => ({ userId, kind: 'journal' as const, entityId: row.id, row }))]); }); }
     async settle(sent: PendingOperation, result: OperationResult) {
         await this.transaction('rw', this.rows, this.outbox, async () => {
