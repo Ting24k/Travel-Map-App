@@ -1,0 +1,52 @@
+import { useEffect, useState } from 'react';
+import { LogIn, LogOut, Download, RefreshCw, Cloud } from 'lucide-react';
+import { cloud } from './cloud';
+import { collaborationMessages } from './i18n';
+import { accountCache } from './cache';
+import { migrationFingerprint, migrationPreview, queueMigration } from './migration';
+import { downloadBlob, parseBackup, serializeBackup,MAX_BACKUP_BYTES } from '../services/backup';
+import { placeById } from '../data/catalog';
+import type { TravelData } from '../types';
+import type { useAccount } from './useAccount';
+import Modal from '../components/Modal';
+type Account = ReturnType<typeof useAccount>;
+export default function AccountPanel({ account }: {
+    account: Account;
+}) {
+    const data = account.data || account.localData;
+    const lang = data?.preferences.language || 'en', t = collaborationMessages[lang];
+    const [email, setEmail] = useState(''), [code, setCode] = useState(''), [sent, setSent] = useState(false), [busy, setBusy] = useState(false), [error, setError] = useState(''), [notice, setNotice] = useState(''), [source, setSource] = useState<TravelData>(), [replace, setReplace] = useState(false), [markers, setMarkers] = useState<Array<{
+        fingerprint: string;
+        completedAt: string;
+    }>>([]);
+    useEffect(() => { setSource(undefined); setError(''); setNotice(''); setSent(false); setCode(''); const uid = account.session?.user.id; if (uid)
+        void accountCache.migrations.toArray().then(all => setMarkers(all.filter(m => m.userId === uid)));
+    else
+        setMarkers([]); }, [account.session?.user.id]);
+    async function perform(fn: () => Promise<unknown>) { setBusy(true); setError(''); try {
+        await fn();
+    }
+    catch (e) {
+        setError((e as Error).message);
+    }
+    finally {
+        setBusy(false);
+    } }
+    const preview = source && data ? migrationPreview(source, data) : undefined;
+    return <><section className="content-card account-card"><h3><Cloud size={21}/>{t.account}</h3>{!cloud ? <p>{t.notConfigured}</p> : account.session ? <><div className="account-identity"><strong>{data?.profile.displayName || t.account}</strong><span>{account.session.user.email}</span></div>{data && <label className="setting-row">{t.displayName}<input aria-label={t.displayName} maxLength={100} value={data.profile.displayName} onChange={e => { const name = e.target.value; if (name.trim())
+        account.update(d => ({ ...d, profile: { ...d.profile, displayName: name } })); }}/></label>}<div className="backup-actions"><button className="button" disabled={busy} onClick={() => void perform(() => cloud!.signOut())}><LogOut size={16}/>{t.signOut}</button><button className="button" disabled={busy || account.syncing} onClick={() => void account.sync()}><RefreshCw size={16}/>{t.refresh}</button>{data && <button className="button" onClick={() => void perform(async()=>{downloadBlob(new Blob([serializeBackup({ ...data, records: data.records || [], entries: data.entries || [] })], { type: 'application/json' }), 'our-little-world-account.json')})}><Download size={16}/>{t.downloadCloud}</button>}</div></> : <form className="auth-form" onSubmit={e => { e.preventDefault(); void perform(async () => { if (sent) {
+        await cloud!.verifyCode(email.trim(), code.trim());
+    }
+    else {
+        await cloud!.sendCode(email.trim());
+        setSent(true);
+        setNotice(t.codeSent);
+    } }); }}><p>{t.authIntro}</p><label>{t.email}<input required type="email" autoComplete="email" value={email} disabled={sent} onChange={e => setEmail(e.target.value)}/></label>{sent && <label>{t.code}<input required inputMode="numeric" autoComplete="one-time-code" pattern="[0-9]{6,8}" value={code} onChange={e => setCode(e.target.value)}/></label>}<div className="backup-actions"><button className="button primary" disabled={busy || !navigator.onLine}><LogIn size={16}/>{busy ? t.busy : sent ? t.verify : t.sendCode}</button>{sent && <button type="button" className="button" onClick={() => { setSent(false); setCode(''); setNotice(''); }}>{t.cancel}</button>}<button className="button" type="button" disabled={busy} onClick={() => void perform(() => cloud!.recover())}>{t.authRecovery}</button></div><p className="small muted">{t.guestNote}</p></form>}{error && <p role="alert" className="form-error">{error}</p>}{notice && <p role="status" className="form-success">{notice}</p>}{account.cloudError && <p role="alert" className="form-error">{t.syncError}: {account.cloudError}</p>}</section>
+ {account.session && data && account.localData && <section className="content-card migration-card"><h3>{t.migration}</h3><p>{t.migrationIntro}</p><div className="backup-actions"><button className="button" onClick={() => void perform(async()=>{downloadBlob(new Blob([serializeBackup(account.localData!)], { type: 'application/json' }), 'our-little-world-original-local.json')})}><Download size={16}/>{t.downloadLocal}</button><button className="button" onClick={() => { setReplace(false); setSource(account.localData); }}>{t.previewMigration}</button><label className="button file-button">{t.chooseBackup}<input type="file" accept=".json,application/json" data-testid="migration-file" onChange={e => { const file = e.target.files?.[0]; if (file)
+        void perform(async () => { if (file.size > MAX_BACKUP_BYTES)
+            throw Error('Backup too large'); setSource(parseBackup(await file.text())); setReplace(false); }); e.target.value = ''; }}/></label></div>{markers.length > 0 && <div className="migration-history"><h4>{t.importComplete}</h4>{markers.map(m => <p key={m.fingerprint}>{m.completedAt === 'queued' ? t.queued : t.complete}</p>)}</div>}<p className="small muted">{t.migrationTip}</p></section>}
+ {source && preview && data && account.session && <Modal label={t.migration} closeLabel={t.close} onClose={() => setSource(undefined)}><h2>{t.migration}</h2><p className="modal-description">{preview.records.length} {t.importRecords} · {preview.conflicts.length} {t.existingRecords}</p><ul className="migration-preview">{preview.records.map(r => { const p = placeById.get(r.place_id)!; return <li key={r.place_id}>{lang === 'en' ? p.nameEn : p.nameZh} — {t[r.status]}</li>; })}</ul>{source.entries?.some(e=>!e.deleted)&&<><h3>{t.journal} · {source.entries.filter(e=>!e.deleted).length}</h3><p className="small muted">{t.journalImportNote}</p><ul className="migration-preview">{source.entries.filter(e=>!e.deleted).map(e=>{const p=placeById.get(e.place_id);return <li key={e.id}><strong>{lang==='en'?p?.nameEn:p?.nameZh}</strong> · {e.start_date||e.end_date||t.dateUnknown}{e.cities.length>0?' · '+e.cities.join(', '):''}<p>{e.note.slice(0,160)}</p></li>})}</ul></>}<label className="filter-label"><input type="checkbox" checked={replace} onChange={e => setReplace(e.target.checked)}/>{t.replaceExisting}</label><p className="small muted">{t.migrationTip}</p><div className="backup-actions"><button className="button" disabled={busy} onClick={() => void perform(async()=>{downloadBlob(new Blob([serializeBackup(source)], { type: 'application/json' }), 'our-little-world-before-import.json')})}>{t.downloadLocal}</button><button className="button primary" disabled={busy} onClick={() => void perform(async () => { const fingerprint = await migrationFingerprint(source); if (await accountCache.migrations.get([data.profile.id, fingerprint]))
+        throw Error(t.alreadyImported); await queueMigration(accountCache, source, data, replace); setSource(undefined); setNotice(t.migrationQueued); await account.reload(data.profile.id); await account.sync(); })}>{t.confirmMigration}</button></div>{error && <p className="form-error" role="alert">{error}</p>}</Modal>}
+ {account.pending.some(p => 'conflict' in p) && <section className="content-card"><h3>{t.conflictTitle}</h3><p>{t.conflictNote}</p>{account.pending.filter(p => 'conflict' in p).map(op => { const place = placeById.get(op.entityId), remote = op.conflict as unknown as Record<string, unknown> | null; const describe = (r: Record<string, unknown> | null) => r ? [r.status ? t[r.status as 'visited'] : null, r.custom_color, r.display_name, r.note, r.start_date, r.end_date, Array.isArray(r.cities) ? r.cities.join(', ') : null, r.deleted ? '✕' : null, r.preferences ? JSON.stringify(r.preferences) : null].filter(Boolean).join(' · ') : '—'; return <article className="conflict-card" key={op.id}><h4>{place ? (lang === 'en' ? place.nameEn : place.nameZh) : op.kind === 'profile' ? t.account : t.journal}</h4><p><strong>{t.yourChange}: </strong>{describe(op.payload)}</p><p><strong>{t.cloudChange}: </strong>{describe(remote)}</p><div className="backup-actions"><button className="button" onClick={() => void account.resolve(op, false)}>{t.useCloud}</button><button className="button primary" onClick={() => void account.resolve(op, true)}>{t.keepMine}</button></div></article>; })}</section>}
+ </>;
+}

@@ -1,0 +1,38 @@
+import { useEffect, useState } from 'react';
+import { BookOpen, Plus, Pencil, Trash2 } from 'lucide-react';
+import type { TravelData, Place } from '../types';
+import type { TravelEntry } from './types';
+import { places, placeById } from '../data/catalog';
+import { collaborationMessages } from './i18n';
+import { validateEntry } from './model';
+import Modal from '../components/Modal';
+export default function JournalPanel({ data, onSave, startPlace, onStartHandled }: {
+    data: TravelData;
+    onSave: (e: TravelEntry) => void;
+    startPlace?: Place;
+    onStartHandled: () => void;
+}) {
+    const lang = data.preferences.language, t = collaborationMessages[lang];
+    const [filter, setFilter] = useState(''), [editing, setEditing] = useState<TravelEntry>();
+    const name = (id: string) => { const p = placeById.get(id); return p ? (lang === 'en' ? p.nameEn : p.nameZh) : id; };
+    const entries = (data.entries || []).filter(e => !e.deleted && (!filter || e.place_id === filter)).sort((a, b) => (b.start_date || b.created_at).localeCompare(a.start_date || a.created_at));
+    function newEntry(placeId = filter || 'country:CHN') { const now = new Date().toISOString(); return { id: crypto.randomUUID(), user_id: data.profile.id, place_id: placeId, start_date: null, end_date: null, cities: [], note: '', deleted: false, revision: 0, created_at: now, updated_at: now }; }
+    useEffect(() => { if (startPlace) {
+        setEditing(newEntry(startPlace.id));
+        onStartHandled();
+    } }, [startPlace]);
+    return <><section className="page-heading"><div><p className="eyebrow">{t.privateJournal}</p><h2>{t.journal}</h2><p className="page-description">{t.journalPolicy}</p></div><button className="button primary" onClick={() => setEditing(newEntry())}><Plus size={17}/>{t.addEntry}</button></section><section className="content-card"><label className="journal-filter-label">{t.filterPlace}<select className="journal-filter" value={filter} onChange={e => setFilter(e.target.value)}><option value="">{t.allPlaces}</option>{places.filter(p => (data.entries || []).some(e => e.place_id === p.id && !e.deleted)).map(p => <option key={p.id} value={p.id}>{name(p.id)}</option>)}</select></label>{!entries.length && <div className="empty-state"><BookOpen size={36}/><p>{t.journalEmpty}</p><button className="button primary" onClick={() => setEditing(newEntry())}>{t.addEntry}</button></div>}<div className="journal-list">{entries.map(e => <article key={e.id}><div className="journal-entry-heading"><h3>{name(e.place_id)}</h3><div><button className="icon-button" aria-label={t.editEntry} onClick={() => setEditing(e)}><Pencil size={17}/></button><button className="icon-button" aria-label={t.deleteEntry} onClick={() => { if (confirm(t.deleteConfirm))
+        onSave({ ...e, deleted: true, updated_at: new Date().toISOString() }); }}><Trash2 size={17}/></button></div></div><p className="journal-dates">{e.start_date || e.end_date ? `${e.start_date || '—'} → ${e.end_date || '—'}` : t.dateUnknown}</p>{e.cities.length > 0 && <p className="journal-cities">{e.cities.join(' · ')}</p>}<p className="journal-note">{e.note}</p></article>)}</div></section>{editing && <JournalEditor key={editing.id} data={data} entry={editing} onClose={() => setEditing(undefined)} onSave={e => { onSave(e); setEditing(undefined); }}/>}</>;
+}
+function JournalEditor({ data, entry, onClose, onSave }: {
+    data: TravelData;
+    entry: TravelEntry;
+    onClose: () => void;
+    onSave: (e: TravelEntry) => void;
+}) { const lang = data.preferences.language, t = collaborationMessages[lang]; const existing = data.entries?.some(e => e.id === entry.id); const [draft, setDraft] = useState(entry), [cities, setCities] = useState(entry.cities.join(', ')), [error, setError] = useState(false); return <Modal label={existing ? t.editEntry : t.addEntry} closeLabel={t.close} onClose={onClose} className="journal-modal"><h2>{existing ? t.editEntry : t.addEntry}</h2><form className="journal-form" onSubmit={e => { e.preventDefault(); try {
+    const next = validateEntry({ ...draft, cities: cities.split(/[,，]/).map(c => c.trim()).filter(Boolean), updated_at: new Date().toISOString() });
+    onSave(next);
+}
+catch {
+    setError(true);
+} }}><label>{t.filterPlace}<select aria-label={t.filterPlace} value={draft.place_id} onChange={e => setDraft({ ...draft, place_id: e.target.value })}>{places.map(p => <option key={p.id} value={p.id}>{p.type === 'china_province' ? '中国 · ' : ''}{lang === 'en' ? p.nameEn : p.nameZh}</option>)}</select></label><div className="date-fields"><label>{t.startDate}<input aria-label={t.startDate} type="date" value={draft.start_date || ''} onChange={e => setDraft({ ...draft, start_date: e.target.value || null })}/></label><label>{t.endDate}<input aria-label={t.endDate} type="date" min={draft.start_date || undefined} value={draft.end_date || ''} onChange={e => setDraft({ ...draft, end_date: e.target.value || null })}/></label></div><label>{t.cities}<input aria-label={t.cities} value={cities} onChange={e => setCities(e.target.value)}/></label><label>{t.note}<textarea aria-label={t.note} maxLength={4000} rows={5} value={draft.note} onChange={e => setDraft({ ...draft, note: e.target.value })}/></label><p className="small muted">{t.privateJournal}</p>{error && <p className="form-error" role="alert">{t.entryInvalid}</p>}<div className="backup-actions"><button type="button" className="button" onClick={onClose}>{t.cancel}</button><button className="button primary">{t.saveEntry}</button></div></form></Modal>; }

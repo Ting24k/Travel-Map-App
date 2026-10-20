@@ -1,11 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { readFile } from "node:fs/promises";
-async function settings(page: import("@playwright/test").Page) {
-  await page
-    .locator("nav:visible")
-    .getByRole("button", { name: "Settings", exact: true })
-    .click();
-}
+async function settings(page:import('@playwright/test').Page){await page.getByRole('button',{name:'Account',exact:true}).click();await page.getByRole('button',{name:'Settings',exact:true}).click()}
 test("backup download, cancellation, replacement, malformed file, and persistence", async ({
   page,
 }) => {

@@ -1,3 +1,7 @@
+# Original MVP architecture (historical)
+
+The collaborative implementation supersedes this design. See [current architecture](COLLABORATION-ARCHITECTURE.md) and [setup](SUPABASE-SETUP.md).
+
 # Architecture
 
 React views work with `TravelData` and pure travel functions, not Dexie tables. `TravelRepository` is the replaceable boundary for local persistence. IndexedDB schema version 1 has separate profiles, visits, appearances, and preferences tables. Visits and appearances are user-scoped; stable place IDs and ISO timestamps prepare records for a future sync migration. Geographic assets and the catalog contain no travel history.

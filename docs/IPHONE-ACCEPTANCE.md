@@ -12,3 +12,11 @@
 8. Compare Statistics against your records. Verify unmarking places updates counts. Record any defects with iOS version and reproduction steps, without uploading private backups publicly.
 
 The developer must not mark these physical Safari checks as passed until a person runs them on an iPhone.
+
+## Collaborative upgrade acceptance
+
+After [Supabase setup](SUPABASE-SETUP.md), use two real email accounts and two devices. Confirm email-code entry with the iOS keyboard, session persistence after quitting, cross-device visits/colors, private journal synchronization, account switching without seeing the previous account, and sign-out. Preserve a JSON backup from the original Safari origin before importing. Preview migration, keep cloud records by default, and verify Sync confirmation before testing another device.
+
+Create an invitation on A, share it to B, sign in, explicitly accept, and verify read-only friend/both/comparison modes on both maps. Wishlist must not count as visited. A journal note must never appear for the friend. Try expired/reused/revoked invitations and disconnect. Offline friend maps must disappear while personal maps and draft trips remain available. Queue an offline edit, reload, reconnect and verify server confirmation; concurrently edit the same place on another device and resolve the conflict deliberately. A normal shared app URL must never grant friend access.
+
+None of these physical-device or live-project checks has been claimed as executed by the cloud tests.

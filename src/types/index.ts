@@ -5,6 +5,7 @@ export interface UserProfile {
   id: string;
   displayName: string;
   createdAt: string;
+  revision?: number;
 }
 export interface Place {
   id: string;
@@ -34,10 +35,12 @@ export interface UserPreferences {
   theme: "light";
 }
 export interface TravelData {
-  schemaVersion: 1;
+  schemaVersion: 1 | 2;
   profile: UserProfile;
   visits: Visit[];
   appearances: PlaceAppearance[];
   preferences: UserPreferences;
+  records?: import("../collaboration/types").PlaceRecord[];
+  entries?: import("../collaboration/types").TravelEntry[];
 }
 export type MapGeo = FeatureCollection<Geometry, { id: string }>;

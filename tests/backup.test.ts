@@ -4,6 +4,7 @@ import {
   parseBackup,
   serializeBackup,
   validateBackup,
+  MAX_BACKUP_BYTES,
 } from "../src/services/backup";
 import { placeById } from "../src/data/catalog";
 describe("versioned backups", () => {
@@ -76,3 +77,5 @@ describe("versioned backups", () => {
     expect(raw.profile.extra).toBe("no");
   });
 });
+
+it('rejects an oversized otherwise-valid JSON backup before discarding unknown fields',()=>{const data=JSON.stringify({...emptyData(),extra:'x'.repeat(MAX_BACKUP_BYTES)});expect(()=>parseBackup(data)).toThrow('Backup too large')});

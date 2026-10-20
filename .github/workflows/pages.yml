@@ -1,7 +1,7 @@
 name: Test and deploy to GitHub Pages
 on:
   push:
-    branches: [main]
+    branches: [main, codex/collaboration]
   workflow_dispatch:
 permissions:
   contents: read
@@ -18,20 +18,29 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
       - run: npm test
+      - run: npm run test:security
       - run: npm run build
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
+        env:
+          CI: "true"
+      - run: npm run test:cloud
         env:
           CI: "true"
       - name: Build for this repository's Pages path
         run: npm run build
         env:
           BASE_PATH: /${{ github.event.repository.name }}/
+          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
   deploy:
+    if: github.ref == 'refs/heads/main'
     needs: test-build
     permissions:
       pages: write

@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import type { TravelData, MapMode } from "../types";
 import { messages } from "../data/i18n";
-import { downloadBlob, parseBackup, serializeBackup } from "../services/backup";
+import { downloadBlob, parseBackup, serializeBackup,MAX_BACKUP_BYTES } from "../services/backup";
 import { mapToPng } from "../services/image";
 import { statistics } from "../services/travel";
 import Modal from "./Modal";
@@ -28,7 +28,7 @@ export function BackupPanel({
   async function read(file?: File) {
     if (!file) return;
     try {
-      if (file.size > 2 * 1024 * 1024) throw Error("Too large");
+      if (file.size > MAX_BACKUP_BYTES) throw Error("Too large");
       setPending(parseBackup(await file.text()));
       setError(false);
       setStatus("");
@@ -47,14 +47,14 @@ export function BackupPanel({
       <div className="backup-actions">
         <button
           className="button"
-          onClick={() => {
+          onClick={() => {try{
             downloadBlob(
               new Blob([serializeBackup(data)], { type: "application/json" }),
               `our-little-world-${new Date().toISOString().slice(0, 10)}.json`,
             );
             setError(false);
             setStatus(t.exported);
-          }}
+          }catch(e){setError(true);setStatus((e as Error).message)}}}
         >
           <Download size={16} />
           {t.exportData}
@@ -122,7 +122,7 @@ export function BackupPanel({
     </section>
   );
 }
-export function ExportMap({ data, mode }: { data: TravelData; mode: MapMode }) {
+export function ExportMap({ data, mode,label,count,legendEntries }: { data: TravelData; mode: MapMode;label?:string;count?:number;legendEntries?:Array<{label:string;color:string}> }) {
   const t = messages[data.preferences.language];
   const [image, setImage] = useState<{ blob: Blob; url: string }>();
   const [busy, setBusy] = useState(false);
@@ -142,9 +142,10 @@ export function ExportMap({ data, mode }: { data: TravelData; mode: MapMode }) {
       const s = statistics(data, mode);
       const blob = await mapToPng(svg, {
         title: "Our Little World",
-        subtitle: `${t[mode]} · ${s.count} / ${s.total} ${t.visited}`,
+        subtitle: `${t[mode]} · ${label||""} · ${count??s.count} / ${s.total} ${t.visited}`,
         legend: t.visited,
         color: data.preferences.defaultVisitedColor,
+        legendEntries,
       });
       setImage({ blob, url: URL.createObjectURL(blob) });
     } catch {

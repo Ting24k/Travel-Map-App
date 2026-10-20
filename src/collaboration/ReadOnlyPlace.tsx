@@ -1,0 +1,10 @@
+import Modal from '../components/Modal';
+import type { Place, TravelData } from '../types';
+import { collaborationMessages } from './i18n';
+import { effectiveStatus } from '../services/travel';
+export default function ReadOnlyPlace({ place, me, friend, onClose }: {
+    place: Place;
+    me: TravelData;
+    friend: TravelData;
+    onClose: () => void;
+}) { const lang = me.preferences.language, t = collaborationMessages[lang]; const status = (d: TravelData) => effectiveStatus(d,place.id); return <Modal label={lang === 'en' ? place.nameEn : place.nameZh} closeLabel={t.close} onClose={onClose} className="place-sheet"><p className="eyebrow">{t.readOnly}</p><h2>{lang === 'en' ? place.nameEn : place.nameZh}</h2><p className="secondary-name">{lang === 'en' ? place.nameZh : place.nameEn}</p><div className="readonly-status"><strong>{me.profile.displayName} · {t.myStatus}</strong><span>{t[status(me)]}</span></div><div className="readonly-status"><strong>{friend.profile.displayName} · {t.friendStatus}</strong><span>{t[status(friend)]}</span></div><p className="small muted">{t.sharedNote}</p><button className="button full" onClick={onClose}>{t.close}</button></Modal>; }
