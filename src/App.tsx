@@ -34,6 +34,7 @@ export default function App() {
     } }, [shared.friendData, view]);
     const [mode, setMode] = useState<MapMode>("world");
     const [page, setPage] = useState<Page>(invitationToken() ? "friends" : "map");
+    useEffect(()=>{if(account.session?.user.id&&invitationToken())setPage('friends')},[account.session?.user.id]);
     const [selected, setSelected] = useState<Place>();
     const [query, setQuery] = useState("");
     const [onlyVisited, setOnlyVisited] = useState(false);

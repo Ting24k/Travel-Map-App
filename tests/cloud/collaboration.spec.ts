@@ -114,3 +114,11 @@ test('two accounts, second device, migration, invitation, read-only comparison, 
         await ca2.close();
     }
 });
+
+test('a new friend returns to the invitation after first signing in',async({page,context,browser},info)=>{
+ const api=fixture();await api.install(context);await login(page,'a@example.com');await page.getByRole('textbox',{name:'Display name'}).fill('Alice');await expect.poll(()=>api.users.get(ids.a)?.profile.display_name).toBe('Alice');await nav(page,'Friends');await page.getByRole('button',{name:'Invite friend',exact:true}).click();const link=await page.getByRole('textbox',{name:'Copy invitation link'}).inputValue();
+ const mobile=info.project.name==='iphone-sized';const cb=await browser.newContext({viewport:mobile?{width:390,height:844}:{width:1280,height:900},isMobile:mobile,hasTouch:mobile});await api.install(cb);const b=await cb.newPage();try{
+  await b.goto(link);await b.locator('.invitation-review').getByRole('button',{name:'Sign in',exact:true}).click();await b.getByRole('textbox',{name:'Email address'}).fill('b@example.com');await b.getByRole('button',{name:'Send sign-in code'}).click();await b.getByRole('textbox',{name:'Email code'}).fill('123456');await b.getByRole('button',{name:'Verify & sign in'}).click();
+  await expect(b.locator('.invitation-review')).toContainText('Alice');expect(api.connections.size).toBe(0);await b.getByRole('button',{name:'Accept invitation',exact:true}).click();await expect.poll(()=>api.connections.size).toBe(1);
+ }finally{await cb.close()}
+});
