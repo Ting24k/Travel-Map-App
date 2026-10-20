@@ -27,6 +27,10 @@ import {collaborationMessages} from "./collaboration/i18n";
 import AccountPanel from "./collaboration/AccountPanel";
 import FriendsPanel,{invitationToken} from "./collaboration/FriendsPanel";
 import {cloud} from "./collaboration/cloud";
+import ComparisonControls from "./collaboration/ComparisonControls";
+import ReadOnlyPlace from "./collaboration/ReadOnlyPlace";
+import {pairStatistics,viewColor} from "./collaboration/model";
+import type {ViewMode} from "./collaboration/types";
 import { messages } from "./data/i18n";
 import { searchPlaces, placesFor } from "./data/catalog";
 import { colorFor, isVisited, statistics } from "./services/travel";
@@ -37,6 +41,9 @@ export default function App() {
   const { data, error, saving, update, retry, replace } = account;
   const shared=useFriends(account.session?.user.id);
   const [profileOpen,setProfileOpen]=useState(false);
+  const [view,setView]=useState<ViewMode>("mine");
+  useEffect(()=>{setView("mine");setSelected(undefined)},[account.session?.user.id,shared.selectedId]);
+  useEffect(()=>{if(!shared.friendData&&view!=="mine"){setView("mine");setSelected(undefined)}},[shared.friendData,view]);
   const [mode, setMode] = useState<MapMode>("world");
   const [page, setPage] = useState<Page>(invitationToken()?"friends":"map");
   const [selected, setSelected] = useState<Place>();
@@ -81,6 +88,9 @@ export default function App() {
     stats = statistics(data, mode),
     world = statistics(data, "world"),
     china = statistics(data, "china");
+  const pair=pairStatistics(data,shared.friendData,mode);
+  const viewCount=view==='mine'?pair.mine:view==='friend'?pair.friend:pair.both;
+  const visibleVisited=(id:string)=>view==='mine'?isVisited(data,id):view==='friend'?!!shared.friendData&&isVisited(shared.friendData,id):view==='both'?!!shared.friendData&&isVisited(data,id)&&isVisited(shared.friendData,id):isVisited(data,id)||!!shared.friendData&&isVisited(shared.friendData,id);
   const results = searchPlaces(query, mode).filter(
     (p) => page !== "places" || !onlyVisited || isVisited(data, p.id),
   );
@@ -232,7 +242,7 @@ export default function App() {
                 </p>
               </div>
               <div className="heading-actions">
-                <ExportMap data={data} mode={mode} />
+                <ExportMap data={data} mode={mode} label={view==='friend'?shared.friendData?.profile.displayName:view==='comparison'?t.comparison:view==='both'?t.bothVisited:t.myMap} count={viewCount}/>
               </div>
             </section>
             <section className="map-card">
@@ -241,14 +251,15 @@ export default function App() {
                 {search}
                 <button className="text-button browse-button" onClick={()=>setPage('places')}>{t.browsePlaces}</button>
               </div>
+              <ComparisonControls language={lang} view={view} onView={v=>{setView(v);setSelected(undefined)}} friends={shared.friends} selected={shared.selectedId} onSelect={shared.setSelectedId} friendData={shared.friendData} loading={shared.loading} onConnect={()=>setPage('friends')}/>
               <div className="map-stage">
                 <TravelMap
                   mode={mode}
                   language={lang}
                   selected={selected?.id}
                   onSelect={setSelected}
-                  colorFor={(id) => colorFor(data, id)}
-                  visited={(id) => isVisited(data, id)}
+                  colorFor={(id) => viewColor(data,shared.friendData,view,id)}
+                  visited={visibleVisited}
                 />
                 <div className="map-progress">
                   <span className="progress-orbit">
@@ -256,7 +267,7 @@ export default function App() {
                   </span>
                   <div>
                     <strong>
-                      {stats.count}
+                      {viewCount}
                       <span> / {stats.total}</span>
                     </strong>
                     <small>
@@ -424,7 +435,8 @@ export default function App() {
                 );
               })}
             </section>
-            <p className="muted small stats-note">{t.statNote}</p>
+            <p className="muted small stats-note">{t.statNote} {t.sharedNote}</p>
+            {shared.friendData&&<section className="content-card"><h3>{data.profile.displayName} + {shared.friendData.profile.displayName}</h3>{(['world','china'] as const).map(m=>{const p=pairStatistics(data,shared.friendData,m);return <div className="pair-stats" key={m}><h4>{m==='world'?t.countries:t.regions} / {p.total}</h4>{[[t.myMap,p.mine],[t.friendMap,p.friend],[t.bothVisited,p.both],[t.mineOnly,p.onlyMine],[t.friendOnly,p.onlyFriend],[t.myWishlist,p.wishlist],[t.friendWishlist,p.friendWishlist]].map(([label,n])=><p key={label}><span>{label}</span><strong>{n}</strong></p>)}</div>})}</section>}
             <section className="content-card">
               <h3>{t.recent}</h3>
               <div className="visited-chips">
@@ -604,7 +616,8 @@ export default function App() {
           </button>
         ))}
       </nav>
-      {selected && (
+      {selected&&view!=='mine'&&shared.friendData&&<ReadOnlyPlace place={selected} me={data} friend={shared.friendData} onClose={()=>setSelected(undefined)}/>}
+      {selected &&view==='mine'&& (
         <PlaceSheet
           place={selected}
           data={data}

@@ -122,7 +122,7 @@ export function BackupPanel({
     </section>
   );
 }
-export function ExportMap({ data, mode }: { data: TravelData; mode: MapMode }) {
+export function ExportMap({ data, mode,label,count }: { data: TravelData; mode: MapMode;label?:string;count?:number }) {
   const t = messages[data.preferences.language];
   const [image, setImage] = useState<{ blob: Blob; url: string }>();
   const [busy, setBusy] = useState(false);
@@ -142,7 +142,7 @@ export function ExportMap({ data, mode }: { data: TravelData; mode: MapMode }) {
       const s = statistics(data, mode);
       const blob = await mapToPng(svg, {
         title: "Our Little World",
-        subtitle: `${t[mode]} · ${s.count} / ${s.total} ${t.visited}`,
+        subtitle: `${t[mode]} · ${label||""} · ${count??s.count} / ${s.total} ${t.visited}`,
         legend: t.visited,
         color: data.preferences.defaultVisitedColor,
       });
