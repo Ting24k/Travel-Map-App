@@ -1,0 +1,22 @@
+{
+  "revision": "ca96624a56bd078437bca8184e78163e5039ad19",
+  "componentCounts": {
+    "world": 4274,
+    "china": 113
+  },
+  "license": "Natural Earth public domain",
+  "attribution": "Made with Natural Earth. naturalearthdata.com",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_admin_0_countries.geojson",
+      "sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_admin_1_states_provinces.geojson",
+      "sha256": "22d0e3ad85eb3e27f17cabf8ba2d50e554fbc27a87796ff891d958185da62fb5"
+    }
+  ],
+  "worldUnits": 258,
+  "chinaUnits": 34,
+  "policy": "All 258 NE admin-0 map units retained, including territories, disputed units, and Antarctica; world statistics count these catalog units, not sovereign states. China view: 31 mainland units plus Hong Kong, Macau, Taiwan. Separate NE Paracel feature merged into Hainan without discarding geometry. Classification is for travel organization and does not assert sovereignty. NE de facto boundary policy; not navigation or legal evidence. IDs are NE ADM0_A3 and ISO 3166-2, independent across views."
+}

@@ -1,0 +1,2338 @@
+[
+  {
+    "id": "country:IDN",
+    "type": "country",
+    "nameEn": "Indonesia",
+    "nameZh": "印度尼西亚",
+    "isoCode": "ID",
+    "geometryRef": "world#country:IDN"
+  },
+  {
+    "id": "country:MYS",
+    "type": "country",
+    "nameEn": "Malaysia",
+    "nameZh": "马来西亚",
+    "isoCode": "MY",
+    "geometryRef": "world#country:MYS"
+  },
+  {
+    "id": "country:CHL",
+    "type": "country",
+    "nameEn": "Chile",
+    "nameZh": "智利",
+    "isoCode": "CL",
+    "geometryRef": "world#country:CHL"
+  },
+  {
+    "id": "country:BOL",
+    "type": "country",
+    "nameEn": "Bolivia",
+    "nameZh": "玻利维亚",
+    "isoCode": "BO",
+    "geometryRef": "world#country:BOL"
+  },
+  {
+    "id": "country:PER",
+    "type": "country",
+    "nameEn": "Peru",
+    "nameZh": "秘鲁",
+    "isoCode": "PE",
+    "geometryRef": "world#country:PER"
+  },
+  {
+    "id": "country:ARG",
+    "type": "country",
+    "nameEn": "Argentina",
+    "nameZh": "阿根廷",
+    "isoCode": "AR",
+    "geometryRef": "world#country:ARG"
+  },
+  {
+    "id": "country:ESB",
+    "type": "country",
+    "nameEn": "Dhekelia Cantonment",
+    "nameZh": "泽凯利亚军营",
+    "isoCode": null,
+    "geometryRef": "world#country:ESB"
+  },
+  {
+    "id": "country:CYP",
+    "type": "country",
+    "nameEn": "Cyprus",
+    "nameZh": "塞浦路斯",
+    "isoCode": "CY",
+    "geometryRef": "world#country:CYP"
+  },
+  {
+    "id": "country:IND",
+    "type": "country",
+    "nameEn": "India",
+    "nameZh": "印度",
+    "isoCode": "IN",
+    "geometryRef": "world#country:IND"
+  },
+  {
+    "id": "country:CHN",
+    "type": "country",
+    "nameEn": "China",
+    "nameZh": "中国",
+    "isoCode": "CN",
+    "geometryRef": "world#country:CHN"
+  },
+  {
+    "id": "country:ISR",
+    "type": "country",
+    "nameEn": "Israel",
+    "nameZh": "以色列",
+    "isoCode": "IL",
+    "geometryRef": "world#country:ISR"
+  },
+  {
+    "id": "country:PSX",
+    "type": "country",
+    "nameEn": "Palestine",
+    "nameZh": "巴勒斯坦",
+    "isoCode": "PS",
+    "geometryRef": "world#country:PSX"
+  },
+  {
+    "id": "country:LBN",
+    "type": "country",
+    "nameEn": "Lebanon",
+    "nameZh": "黎巴嫩",
+    "isoCode": "LB",
+    "geometryRef": "world#country:LBN"
+  },
+  {
+    "id": "country:ETH",
+    "type": "country",
+    "nameEn": "Ethiopia",
+    "nameZh": "埃塞俄比亚",
+    "isoCode": "ET",
+    "geometryRef": "world#country:ETH"
+  },
+  {
+    "id": "country:SDS",
+    "type": "country",
+    "nameEn": "South Sudan",
+    "nameZh": "南苏丹",
+    "isoCode": "SS",
+    "geometryRef": "world#country:SDS"
+  },
+  {
+    "id": "country:SOM",
+    "type": "country",
+    "nameEn": "Somalia",
+    "nameZh": "索马里",
+    "isoCode": "SO",
+    "geometryRef": "world#country:SOM"
+  },
+  {
+    "id": "country:KEN",
+    "type": "country",
+    "nameEn": "Kenya",
+    "nameZh": "肯尼亚",
+    "isoCode": "KE",
+    "geometryRef": "world#country:KEN"
+  },
+  {
+    "id": "country:MWI",
+    "type": "country",
+    "nameEn": "Malawi",
+    "nameZh": "马拉维",
+    "isoCode": "MW",
+    "geometryRef": "world#country:MWI"
+  },
+  {
+    "id": "country:TZA",
+    "type": "country",
+    "nameEn": "Tanzania",
+    "nameZh": "坦桑尼亚",
+    "isoCode": "TZ",
+    "geometryRef": "world#country:TZA"
+  },
+  {
+    "id": "country:SYR",
+    "type": "country",
+    "nameEn": "Syria",
+    "nameZh": "叙利亚",
+    "isoCode": "SY",
+    "geometryRef": "world#country:SYR"
+  },
+  {
+    "id": "country:SOL",
+    "type": "country",
+    "nameEn": "Somaliland",
+    "nameZh": "索马里兰",
+    "isoCode": null,
+    "geometryRef": "world#country:SOL"
+  },
+  {
+    "id": "country:FRA",
+    "type": "country",
+    "nameEn": "France",
+    "nameZh": "法国",
+    "isoCode": "FR",
+    "geometryRef": "world#country:FRA"
+  },
+  {
+    "id": "country:SUR",
+    "type": "country",
+    "nameEn": "Suriname",
+    "nameZh": "苏里南",
+    "isoCode": "SR",
+    "geometryRef": "world#country:SUR"
+  },
+  {
+    "id": "country:GUY",
+    "type": "country",
+    "nameEn": "Guyana",
+    "nameZh": "圭亚那",
+    "isoCode": "GY",
+    "geometryRef": "world#country:GUY"
+  },
+  {
+    "id": "country:KOR",
+    "type": "country",
+    "nameEn": "South Korea",
+    "nameZh": "大韩民国",
+    "isoCode": "KR",
+    "geometryRef": "world#country:KOR"
+  },
+  {
+    "id": "country:PRK",
+    "type": "country",
+    "nameEn": "North Korea",
+    "nameZh": "朝鲜民主主义人民共和国",
+    "isoCode": "KP",
+    "geometryRef": "world#country:PRK"
+  },
+  {
+    "id": "country:MAR",
+    "type": "country",
+    "nameEn": "Morocco",
+    "nameZh": "摩洛哥",
+    "isoCode": "MA",
+    "geometryRef": "world#country:MAR"
+  },
+  {
+    "id": "country:SAH",
+    "type": "country",
+    "nameEn": "Western Sahara",
+    "nameZh": "西撒哈拉",
+    "isoCode": "EH",
+    "geometryRef": "world#country:SAH"
+  },
+  {
+    "id": "country:CRI",
+    "type": "country",
+    "nameEn": "Costa Rica",
+    "nameZh": "哥斯达黎加",
+    "isoCode": "CR",
+    "geometryRef": "world#country:CRI"
+  },
+  {
+    "id": "country:NIC",
+    "type": "country",
+    "nameEn": "Nicaragua",
+    "nameZh": "尼加拉瓜",
+    "isoCode": "NI",
+    "geometryRef": "world#country:NIC"
+  },
+  {
+    "id": "country:COG",
+    "type": "country",
+    "nameEn": "Republic of the Congo",
+    "nameZh": "刚果共和国",
+    "isoCode": "CG",
+    "geometryRef": "world#country:COG"
+  },
+  {
+    "id": "country:COD",
+    "type": "country",
+    "nameEn": "Democratic Republic of the Congo",
+    "nameZh": "刚果民主共和国",
+    "isoCode": "CD",
+    "geometryRef": "world#country:COD"
+  },
+  {
+    "id": "country:BTN",
+    "type": "country",
+    "nameEn": "Bhutan",
+    "nameZh": "不丹",
+    "isoCode": "BT",
+    "geometryRef": "world#country:BTN"
+  },
+  {
+    "id": "country:UKR",
+    "type": "country",
+    "nameEn": "Ukraine",
+    "nameZh": "乌克兰",
+    "isoCode": "UA",
+    "geometryRef": "world#country:UKR"
+  },
+  {
+    "id": "country:BLR",
+    "type": "country",
+    "nameEn": "Belarus",
+    "nameZh": "白俄罗斯",
+    "isoCode": "BY",
+    "geometryRef": "world#country:BLR"
+  },
+  {
+    "id": "country:NAM",
+    "type": "country",
+    "nameEn": "Namibia",
+    "nameZh": "纳米比亚",
+    "isoCode": "NA",
+    "geometryRef": "world#country:NAM"
+  },
+  {
+    "id": "country:ZAF",
+    "type": "country",
+    "nameEn": "South Africa",
+    "nameZh": "南非",
+    "isoCode": "ZA",
+    "geometryRef": "world#country:ZAF"
+  },
+  {
+    "id": "country:MAF",
+    "type": "country",
+    "nameEn": "Saint Martin",
+    "nameZh": "法属圣马丁",
+    "isoCode": "MF",
+    "geometryRef": "world#country:MAF"
+  },
+  {
+    "id": "country:SXM",
+    "type": "country",
+    "nameEn": "Sint Maarten",
+    "nameZh": "荷属圣马丁",
+    "isoCode": "SX",
+    "geometryRef": "world#country:SXM"
+  },
+  {
+    "id": "country:OMN",
+    "type": "country",
+    "nameEn": "Oman",
+    "nameZh": "阿曼",
+    "isoCode": "OM",
+    "geometryRef": "world#country:OMN"
+  },
+  {
+    "id": "country:UZB",
+    "type": "country",
+    "nameEn": "Uzbekistan",
+    "nameZh": "乌兹别克斯坦",
+    "isoCode": "UZ",
+    "geometryRef": "world#country:UZB"
+  },
+  {
+    "id": "country:KAZ",
+    "type": "country",
+    "nameEn": "Kazakhstan",
+    "nameZh": "哈萨克斯坦",
+    "isoCode": "KZ",
+    "geometryRef": "world#country:KAZ"
+  },
+  {
+    "id": "country:TJK",
+    "type": "country",
+    "nameEn": "Tajikistan",
+    "nameZh": "塔吉克斯坦",
+    "isoCode": "TJ",
+    "geometryRef": "world#country:TJK"
+  },
+  {
+    "id": "country:LTU",
+    "type": "country",
+    "nameEn": "Lithuania",
+    "nameZh": "立陶宛",
+    "isoCode": "LT",
+    "geometryRef": "world#country:LTU"
+  },
+  {
+    "id": "country:BRA",
+    "type": "country",
+    "nameEn": "Brazil",
+    "nameZh": "巴西",
+    "isoCode": "BR",
+    "geometryRef": "world#country:BRA"
+  },
+  {
+    "id": "country:URY",
+    "type": "country",
+    "nameEn": "Uruguay",
+    "nameZh": "乌拉圭",
+    "isoCode": "UY",
+    "geometryRef": "world#country:URY"
+  },
+  {
+    "id": "country:MNG",
+    "type": "country",
+    "nameEn": "Mongolia",
+    "nameZh": "蒙古国",
+    "isoCode": "MN",
+    "geometryRef": "world#country:MNG"
+  },
+  {
+    "id": "country:RUS",
+    "type": "country",
+    "nameEn": "Russia",
+    "nameZh": "俄罗斯",
+    "isoCode": "RU",
+    "geometryRef": "world#country:RUS"
+  },
+  {
+    "id": "country:CZE",
+    "type": "country",
+    "nameEn": "Czech Republic",
+    "nameZh": "捷克",
+    "isoCode": "CZ",
+    "geometryRef": "world#country:CZE"
+  },
+  {
+    "id": "country:DEU",
+    "type": "country",
+    "nameEn": "Germany",
+    "nameZh": "德国",
+    "isoCode": "DE",
+    "geometryRef": "world#country:DEU"
+  },
+  {
+    "id": "country:EST",
+    "type": "country",
+    "nameEn": "Estonia",
+    "nameZh": "爱沙尼亚",
+    "isoCode": "EE",
+    "geometryRef": "world#country:EST"
+  },
+  {
+    "id": "country:LVA",
+    "type": "country",
+    "nameEn": "Latvia",
+    "nameZh": "拉脱维亚",
+    "isoCode": "LV",
+    "geometryRef": "world#country:LVA"
+  },
+  {
+    "id": "country:NOR",
+    "type": "country",
+    "nameEn": "Norway",
+    "nameZh": "挪威",
+    "isoCode": "NO",
+    "geometryRef": "world#country:NOR"
+  },
+  {
+    "id": "country:SWE",
+    "type": "country",
+    "nameEn": "Sweden",
+    "nameZh": "瑞典",
+    "isoCode": "SE",
+    "geometryRef": "world#country:SWE"
+  },
+  {
+    "id": "country:FIN",
+    "type": "country",
+    "nameEn": "Finland",
+    "nameZh": "芬兰",
+    "isoCode": "FI",
+    "geometryRef": "world#country:FIN"
+  },
+  {
+    "id": "country:VNM",
+    "type": "country",
+    "nameEn": "Vietnam",
+    "nameZh": "越南",
+    "isoCode": "VN",
+    "geometryRef": "world#country:VNM"
+  },
+  {
+    "id": "country:KHM",
+    "type": "country",
+    "nameEn": "Cambodia",
+    "nameZh": "柬埔寨",
+    "isoCode": "KH",
+    "geometryRef": "world#country:KHM"
+  },
+  {
+    "id": "country:LUX",
+    "type": "country",
+    "nameEn": "Luxembourg",
+    "nameZh": "卢森堡",
+    "isoCode": "LU",
+    "geometryRef": "world#country:LUX"
+  },
+  {
+    "id": "country:ARE",
+    "type": "country",
+    "nameEn": "United Arab Emirates",
+    "nameZh": "阿拉伯联合酋长国",
+    "isoCode": "AE",
+    "geometryRef": "world#country:ARE"
+  },
+  {
+    "id": "country:BEL",
+    "type": "country",
+    "nameEn": "Belgium",
+    "nameZh": "比利时",
+    "isoCode": "BE",
+    "geometryRef": "world#country:BEL"
+  },
+  {
+    "id": "country:GEO",
+    "type": "country",
+    "nameEn": "Georgia",
+    "nameZh": "格鲁吉亚",
+    "isoCode": "GE",
+    "geometryRef": "world#country:GEO"
+  },
+  {
+    "id": "country:MKD",
+    "type": "country",
+    "nameEn": "North Macedonia",
+    "nameZh": "北马其顿",
+    "isoCode": "MK",
+    "geometryRef": "world#country:MKD"
+  },
+  {
+    "id": "country:ALB",
+    "type": "country",
+    "nameEn": "Albania",
+    "nameZh": "阿尔巴尼亚",
+    "isoCode": "AL",
+    "geometryRef": "world#country:ALB"
+  },
+  {
+    "id": "country:AZE",
+    "type": "country",
+    "nameEn": "Azerbaijan",
+    "nameZh": "阿塞拜疆",
+    "isoCode": "AZ",
+    "geometryRef": "world#country:AZE"
+  },
+  {
+    "id": "country:KOS",
+    "type": "country",
+    "nameEn": "Kosovo",
+    "nameZh": "科索沃",
+    "isoCode": "XK",
+    "geometryRef": "world#country:KOS"
+  },
+  {
+    "id": "country:TUR",
+    "type": "country",
+    "nameEn": "Turkey",
+    "nameZh": "土耳其",
+    "isoCode": "TR",
+    "geometryRef": "world#country:TUR"
+  },
+  {
+    "id": "country:ESP",
+    "type": "country",
+    "nameEn": "Spain",
+    "nameZh": "西班牙",
+    "isoCode": "ES",
+    "geometryRef": "world#country:ESP"
+  },
+  {
+    "id": "country:LAO",
+    "type": "country",
+    "nameEn": "Laos",
+    "nameZh": "老挝",
+    "isoCode": "LA",
+    "geometryRef": "world#country:LAO"
+  },
+  {
+    "id": "country:KGZ",
+    "type": "country",
+    "nameEn": "Kyrgyzstan",
+    "nameZh": "吉尔吉斯斯坦",
+    "isoCode": "KG",
+    "geometryRef": "world#country:KGZ"
+  },
+  {
+    "id": "country:ARM",
+    "type": "country",
+    "nameEn": "Armenia",
+    "nameZh": "亚美尼亚",
+    "isoCode": "AM",
+    "geometryRef": "world#country:ARM"
+  },
+  {
+    "id": "country:DNK",
+    "type": "country",
+    "nameEn": "Denmark",
+    "nameZh": "丹麦",
+    "isoCode": "DK",
+    "geometryRef": "world#country:DNK"
+  },
+  {
+    "id": "country:LBY",
+    "type": "country",
+    "nameEn": "Libya",
+    "nameZh": "利比亚",
+    "isoCode": "LY",
+    "geometryRef": "world#country:LBY"
+  },
+  {
+    "id": "country:TUN",
+    "type": "country",
+    "nameEn": "Tunisia",
+    "nameZh": "突尼斯",
+    "isoCode": "TN",
+    "geometryRef": "world#country:TUN"
+  },
+  {
+    "id": "country:ROU",
+    "type": "country",
+    "nameEn": "Romania",
+    "nameZh": "罗马尼亚",
+    "isoCode": "RO",
+    "geometryRef": "world#country:ROU"
+  },
+  {
+    "id": "country:HUN",
+    "type": "country",
+    "nameEn": "Hungary",
+    "nameZh": "匈牙利",
+    "isoCode": "HU",
+    "geometryRef": "world#country:HUN"
+  },
+  {
+    "id": "country:SVK",
+    "type": "country",
+    "nameEn": "Slovakia",
+    "nameZh": "斯洛伐克",
+    "isoCode": "SK",
+    "geometryRef": "world#country:SVK"
+  },
+  {
+    "id": "country:POL",
+    "type": "country",
+    "nameEn": "Poland",
+    "nameZh": "波兰",
+    "isoCode": "PL",
+    "geometryRef": "world#country:POL"
+  },
+  {
+    "id": "country:IRL",
+    "type": "country",
+    "nameEn": "Ireland",
+    "nameZh": "爱尔兰",
+    "isoCode": "IE",
+    "geometryRef": "world#country:IRL"
+  },
+  {
+    "id": "country:GBR",
+    "type": "country",
+    "nameEn": "United Kingdom",
+    "nameZh": "英国",
+    "isoCode": "GB",
+    "geometryRef": "world#country:GBR"
+  },
+  {
+    "id": "country:GRC",
+    "type": "country",
+    "nameEn": "Greece",
+    "nameZh": "希腊",
+    "isoCode": "GR",
+    "geometryRef": "world#country:GRC"
+  },
+  {
+    "id": "country:ZMB",
+    "type": "country",
+    "nameEn": "Zambia",
+    "nameZh": "赞比亚",
+    "isoCode": "ZM",
+    "geometryRef": "world#country:ZMB"
+  },
+  {
+    "id": "country:SLE",
+    "type": "country",
+    "nameEn": "Sierra Leone",
+    "nameZh": "塞拉利昂",
+    "isoCode": "SL",
+    "geometryRef": "world#country:SLE"
+  },
+  {
+    "id": "country:GIN",
+    "type": "country",
+    "nameEn": "Guinea",
+    "nameZh": "几内亚",
+    "isoCode": "GN",
+    "geometryRef": "world#country:GIN"
+  },
+  {
+    "id": "country:LBR",
+    "type": "country",
+    "nameEn": "Liberia",
+    "nameZh": "利比里亚",
+    "isoCode": "LR",
+    "geometryRef": "world#country:LBR"
+  },
+  {
+    "id": "country:CAF",
+    "type": "country",
+    "nameEn": "Central African Republic",
+    "nameZh": "中非共和国",
+    "isoCode": "CF",
+    "geometryRef": "world#country:CAF"
+  },
+  {
+    "id": "country:SDN",
+    "type": "country",
+    "nameEn": "Sudan",
+    "nameZh": "苏丹",
+    "isoCode": "SD",
+    "geometryRef": "world#country:SDN"
+  },
+  {
+    "id": "country:DJI",
+    "type": "country",
+    "nameEn": "Djibouti",
+    "nameZh": "吉布提",
+    "isoCode": "DJ",
+    "geometryRef": "world#country:DJI"
+  },
+  {
+    "id": "country:ERI",
+    "type": "country",
+    "nameEn": "Eritrea",
+    "nameZh": "厄立特里亚",
+    "isoCode": "ER",
+    "geometryRef": "world#country:ERI"
+  },
+  {
+    "id": "country:AUT",
+    "type": "country",
+    "nameEn": "Austria",
+    "nameZh": "奥地利",
+    "isoCode": "AT",
+    "geometryRef": "world#country:AUT"
+  },
+  {
+    "id": "country:IRQ",
+    "type": "country",
+    "nameEn": "Iraq",
+    "nameZh": "伊拉克",
+    "isoCode": "IQ",
+    "geometryRef": "world#country:IRQ"
+  },
+  {
+    "id": "country:ITA",
+    "type": "country",
+    "nameEn": "Italy",
+    "nameZh": "意大利",
+    "isoCode": "IT",
+    "geometryRef": "world#country:ITA"
+  },
+  {
+    "id": "country:CHE",
+    "type": "country",
+    "nameEn": "Switzerland",
+    "nameZh": "瑞士",
+    "isoCode": "CH",
+    "geometryRef": "world#country:CHE"
+  },
+  {
+    "id": "country:IRN",
+    "type": "country",
+    "nameEn": "Iran",
+    "nameZh": "伊朗",
+    "isoCode": "IR",
+    "geometryRef": "world#country:IRN"
+  },
+  {
+    "id": "country:NLD",
+    "type": "country",
+    "nameEn": "Netherlands",
+    "nameZh": "荷兰",
+    "isoCode": "NL",
+    "geometryRef": "world#country:NLD"
+  },
+  {
+    "id": "country:LIE",
+    "type": "country",
+    "nameEn": "Liechtenstein",
+    "nameZh": "列支敦士登",
+    "isoCode": "LI",
+    "geometryRef": "world#country:LIE"
+  },
+  {
+    "id": "country:CIV",
+    "type": "country",
+    "nameEn": "Ivory Coast",
+    "nameZh": "科特迪瓦",
+    "isoCode": "CI",
+    "geometryRef": "world#country:CIV"
+  },
+  {
+    "id": "country:SRB",
+    "type": "country",
+    "nameEn": "Serbia",
+    "nameZh": "塞尔维亚",
+    "isoCode": "RS",
+    "geometryRef": "world#country:SRB"
+  },
+  {
+    "id": "country:MLI",
+    "type": "country",
+    "nameEn": "Mali",
+    "nameZh": "马里",
+    "isoCode": "ML",
+    "geometryRef": "world#country:MLI"
+  },
+  {
+    "id": "country:SEN",
+    "type": "country",
+    "nameEn": "Senegal",
+    "nameZh": "塞内加尔",
+    "isoCode": "SN",
+    "geometryRef": "world#country:SEN"
+  },
+  {
+    "id": "country:NGA",
+    "type": "country",
+    "nameEn": "Nigeria",
+    "nameZh": "尼日利亚",
+    "isoCode": "NG",
+    "geometryRef": "world#country:NGA"
+  },
+  {
+    "id": "country:BEN",
+    "type": "country",
+    "nameEn": "Benin",
+    "nameZh": "贝宁",
+    "isoCode": "BJ",
+    "geometryRef": "world#country:BEN"
+  },
+  {
+    "id": "country:AGO",
+    "type": "country",
+    "nameEn": "Angola",
+    "nameZh": "安哥拉",
+    "isoCode": "AO",
+    "geometryRef": "world#country:AGO"
+  },
+  {
+    "id": "country:HRV",
+    "type": "country",
+    "nameEn": "Croatia",
+    "nameZh": "克罗地亚",
+    "isoCode": "HR",
+    "geometryRef": "world#country:HRV"
+  },
+  {
+    "id": "country:SVN",
+    "type": "country",
+    "nameEn": "Slovenia",
+    "nameZh": "斯洛文尼亚",
+    "isoCode": "SI",
+    "geometryRef": "world#country:SVN"
+  },
+  {
+    "id": "country:QAT",
+    "type": "country",
+    "nameEn": "Qatar",
+    "nameZh": "卡塔尔",
+    "isoCode": "QA",
+    "geometryRef": "world#country:QAT"
+  },
+  {
+    "id": "country:SAU",
+    "type": "country",
+    "nameEn": "Saudi Arabia",
+    "nameZh": "沙特阿拉伯",
+    "isoCode": "SA",
+    "geometryRef": "world#country:SAU"
+  },
+  {
+    "id": "country:BWA",
+    "type": "country",
+    "nameEn": "Botswana",
+    "nameZh": "博茨瓦纳",
+    "isoCode": "BW",
+    "geometryRef": "world#country:BWA"
+  },
+  {
+    "id": "country:ZWE",
+    "type": "country",
+    "nameEn": "Zimbabwe",
+    "nameZh": "津巴布韦",
+    "isoCode": "ZW",
+    "geometryRef": "world#country:ZWE"
+  },
+  {
+    "id": "country:PAK",
+    "type": "country",
+    "nameEn": "Pakistan",
+    "nameZh": "巴基斯坦",
+    "isoCode": "PK",
+    "geometryRef": "world#country:PAK"
+  },
+  {
+    "id": "country:BGR",
+    "type": "country",
+    "nameEn": "Bulgaria",
+    "nameZh": "保加利亚",
+    "isoCode": "BG",
+    "geometryRef": "world#country:BGR"
+  },
+  {
+    "id": "country:THA",
+    "type": "country",
+    "nameEn": "Thailand",
+    "nameZh": "泰国",
+    "isoCode": "TH",
+    "geometryRef": "world#country:THA"
+  },
+  {
+    "id": "country:SMR",
+    "type": "country",
+    "nameEn": "San Marino",
+    "nameZh": "圣马力诺",
+    "isoCode": "SM",
+    "geometryRef": "world#country:SMR"
+  },
+  {
+    "id": "country:HTI",
+    "type": "country",
+    "nameEn": "Haiti",
+    "nameZh": "海地",
+    "isoCode": "HT",
+    "geometryRef": "world#country:HTI"
+  },
+  {
+    "id": "country:DOM",
+    "type": "country",
+    "nameEn": "Dominican Republic",
+    "nameZh": "多米尼加",
+    "isoCode": "DO",
+    "geometryRef": "world#country:DOM"
+  },
+  {
+    "id": "country:TCD",
+    "type": "country",
+    "nameEn": "Chad",
+    "nameZh": "乍得",
+    "isoCode": "TD",
+    "geometryRef": "world#country:TCD"
+  },
+  {
+    "id": "country:KWT",
+    "type": "country",
+    "nameEn": "Kuwait",
+    "nameZh": "科威特",
+    "isoCode": "KW",
+    "geometryRef": "world#country:KWT"
+  },
+  {
+    "id": "country:SLV",
+    "type": "country",
+    "nameEn": "El Salvador",
+    "nameZh": "萨尔瓦多",
+    "isoCode": "SV",
+    "geometryRef": "world#country:SLV"
+  },
+  {
+    "id": "country:GTM",
+    "type": "country",
+    "nameEn": "Guatemala",
+    "nameZh": "危地马拉",
+    "isoCode": "GT",
+    "geometryRef": "world#country:GTM"
+  },
+  {
+    "id": "country:TLS",
+    "type": "country",
+    "nameEn": "East Timor",
+    "nameZh": "东帝汶",
+    "isoCode": "TL",
+    "geometryRef": "world#country:TLS"
+  },
+  {
+    "id": "country:BRN",
+    "type": "country",
+    "nameEn": "Brunei",
+    "nameZh": "文莱",
+    "isoCode": "BN",
+    "geometryRef": "world#country:BRN"
+  },
+  {
+    "id": "country:MCO",
+    "type": "country",
+    "nameEn": "Monaco",
+    "nameZh": "摩纳哥",
+    "isoCode": "MC",
+    "geometryRef": "world#country:MCO"
+  },
+  {
+    "id": "country:DZA",
+    "type": "country",
+    "nameEn": "Algeria",
+    "nameZh": "阿尔及利亚",
+    "isoCode": "DZ",
+    "geometryRef": "world#country:DZA"
+  },
+  {
+    "id": "country:MOZ",
+    "type": "country",
+    "nameEn": "Mozambique",
+    "nameZh": "莫桑比克",
+    "isoCode": "MZ",
+    "geometryRef": "world#country:MOZ"
+  },
+  {
+    "id": "country:SWZ",
+    "type": "country",
+    "nameEn": "Eswatini",
+    "nameZh": "斯威士兰",
+    "isoCode": "SZ",
+    "geometryRef": "world#country:SWZ"
+  },
+  {
+    "id": "country:BDI",
+    "type": "country",
+    "nameEn": "Burundi",
+    "nameZh": "布隆迪",
+    "isoCode": "BI",
+    "geometryRef": "world#country:BDI"
+  },
+  {
+    "id": "country:RWA",
+    "type": "country",
+    "nameEn": "Rwanda",
+    "nameZh": "卢旺达",
+    "isoCode": "RW",
+    "geometryRef": "world#country:RWA"
+  },
+  {
+    "id": "country:MMR",
+    "type": "country",
+    "nameEn": "Myanmar",
+    "nameZh": "缅甸",
+    "isoCode": "MM",
+    "geometryRef": "world#country:MMR"
+  },
+  {
+    "id": "country:BGD",
+    "type": "country",
+    "nameEn": "Bangladesh",
+    "nameZh": "孟加拉国",
+    "isoCode": "BD",
+    "geometryRef": "world#country:BGD"
+  },
+  {
+    "id": "country:AND",
+    "type": "country",
+    "nameEn": "Andorra",
+    "nameZh": "安道尔",
+    "isoCode": "AD",
+    "geometryRef": "world#country:AND"
+  },
+  {
+    "id": "country:AFG",
+    "type": "country",
+    "nameEn": "Afghanistan",
+    "nameZh": "阿富汗",
+    "isoCode": "AF",
+    "geometryRef": "world#country:AFG"
+  },
+  {
+    "id": "country:MNE",
+    "type": "country",
+    "nameEn": "Montenegro",
+    "nameZh": "黑山",
+    "isoCode": "ME",
+    "geometryRef": "world#country:MNE"
+  },
+  {
+    "id": "country:BIH",
+    "type": "country",
+    "nameEn": "Bosnia and Herzegovina",
+    "nameZh": "波斯尼亚和黑塞哥维那",
+    "isoCode": "BA",
+    "geometryRef": "world#country:BIH"
+  },
+  {
+    "id": "country:UGA",
+    "type": "country",
+    "nameEn": "Uganda",
+    "nameZh": "乌干达",
+    "isoCode": "UG",
+    "geometryRef": "world#country:UGA"
+  },
+  {
+    "id": "country:USG",
+    "type": "country",
+    "nameEn": "Guantanamo Bay Naval Base",
+    "nameZh": "关塔那摩湾海军基地",
+    "isoCode": null,
+    "geometryRef": "world#country:USG"
+  },
+  {
+    "id": "country:CUB",
+    "type": "country",
+    "nameEn": "Cuba",
+    "nameZh": "古巴",
+    "isoCode": "CU",
+    "geometryRef": "world#country:CUB"
+  },
+  {
+    "id": "country:HND",
+    "type": "country",
+    "nameEn": "Honduras",
+    "nameZh": "洪都拉斯",
+    "isoCode": "HN",
+    "geometryRef": "world#country:HND"
+  },
+  {
+    "id": "country:ECU",
+    "type": "country",
+    "nameEn": "Ecuador",
+    "nameZh": "厄瓜多尔",
+    "isoCode": "EC",
+    "geometryRef": "world#country:ECU"
+  },
+  {
+    "id": "country:COL",
+    "type": "country",
+    "nameEn": "Colombia",
+    "nameZh": "哥伦比亚",
+    "isoCode": "CO",
+    "geometryRef": "world#country:COL"
+  },
+  {
+    "id": "country:PRY",
+    "type": "country",
+    "nameEn": "Paraguay",
+    "nameZh": "巴拉圭",
+    "isoCode": "PY",
+    "geometryRef": "world#country:PRY"
+  },
+  {
+    "id": "country:BRI",
+    "type": "country",
+    "nameEn": "Brazilian Island",
+    "nameZh": "巴西岛",
+    "isoCode": "BR",
+    "geometryRef": "world#country:BRI"
+  },
+  {
+    "id": "country:PRT",
+    "type": "country",
+    "nameEn": "Portugal",
+    "nameZh": "葡萄牙",
+    "isoCode": "PT",
+    "geometryRef": "world#country:PRT"
+  },
+  {
+    "id": "country:MDA",
+    "type": "country",
+    "nameEn": "Moldova",
+    "nameZh": "摩尔多瓦",
+    "isoCode": "MD",
+    "geometryRef": "world#country:MDA"
+  },
+  {
+    "id": "country:TKM",
+    "type": "country",
+    "nameEn": "Turkmenistan",
+    "nameZh": "土库曼斯坦",
+    "isoCode": "TM",
+    "geometryRef": "world#country:TKM"
+  },
+  {
+    "id": "country:JOR",
+    "type": "country",
+    "nameEn": "Jordan",
+    "nameZh": "约旦",
+    "isoCode": "JO",
+    "geometryRef": "world#country:JOR"
+  },
+  {
+    "id": "country:NPL",
+    "type": "country",
+    "nameEn": "Nepal",
+    "nameZh": "尼泊尔",
+    "isoCode": "NP",
+    "geometryRef": "world#country:NPL"
+  },
+  {
+    "id": "country:LSO",
+    "type": "country",
+    "nameEn": "Lesotho",
+    "nameZh": "莱索托",
+    "isoCode": "LS",
+    "geometryRef": "world#country:LSO"
+  },
+  {
+    "id": "country:CMR",
+    "type": "country",
+    "nameEn": "Cameroon",
+    "nameZh": "喀麦隆",
+    "isoCode": "CM",
+    "geometryRef": "world#country:CMR"
+  },
+  {
+    "id": "country:GAB",
+    "type": "country",
+    "nameEn": "Gabon",
+    "nameZh": "加蓬",
+    "isoCode": "GA",
+    "geometryRef": "world#country:GAB"
+  },
+  {
+    "id": "country:NER",
+    "type": "country",
+    "nameEn": "Niger",
+    "nameZh": "尼日尔",
+    "isoCode": "NE",
+    "geometryRef": "world#country:NER"
+  },
+  {
+    "id": "country:BFA",
+    "type": "country",
+    "nameEn": "Burkina Faso",
+    "nameZh": "布基纳法索",
+    "isoCode": "BF",
+    "geometryRef": "world#country:BFA"
+  },
+  {
+    "id": "country:TGO",
+    "type": "country",
+    "nameEn": "Togo",
+    "nameZh": "多哥",
+    "isoCode": "TG",
+    "geometryRef": "world#country:TGO"
+  },
+  {
+    "id": "country:GHA",
+    "type": "country",
+    "nameEn": "Ghana",
+    "nameZh": "加纳",
+    "isoCode": "GH",
+    "geometryRef": "world#country:GHA"
+  },
+  {
+    "id": "country:GNB",
+    "type": "country",
+    "nameEn": "Guinea-Bissau",
+    "nameZh": "几内亚比绍",
+    "isoCode": "GW",
+    "geometryRef": "world#country:GNB"
+  },
+  {
+    "id": "country:GIB",
+    "type": "country",
+    "nameEn": "Gibraltar",
+    "nameZh": "直布罗陀",
+    "isoCode": "GI",
+    "geometryRef": "world#country:GIB"
+  },
+  {
+    "id": "country:USA",
+    "type": "country",
+    "nameEn": "United States of America",
+    "nameZh": "美国",
+    "isoCode": "US",
+    "geometryRef": "world#country:USA"
+  },
+  {
+    "id": "country:CAN",
+    "type": "country",
+    "nameEn": "Canada",
+    "nameZh": "加拿大",
+    "isoCode": "CA",
+    "geometryRef": "world#country:CAN"
+  },
+  {
+    "id": "country:MEX",
+    "type": "country",
+    "nameEn": "Mexico",
+    "nameZh": "墨西哥",
+    "isoCode": "MX",
+    "geometryRef": "world#country:MEX"
+  },
+  {
+    "id": "country:BLZ",
+    "type": "country",
+    "nameEn": "Belize",
+    "nameZh": "伯利兹",
+    "isoCode": "BZ",
+    "geometryRef": "world#country:BLZ"
+  },
+  {
+    "id": "country:PAN",
+    "type": "country",
+    "nameEn": "Panama",
+    "nameZh": "巴拿马",
+    "isoCode": "PA",
+    "geometryRef": "world#country:PAN"
+  },
+  {
+    "id": "country:VEN",
+    "type": "country",
+    "nameEn": "Venezuela",
+    "nameZh": "委内瑞拉",
+    "isoCode": "VE",
+    "geometryRef": "world#country:VEN"
+  },
+  {
+    "id": "country:PNG",
+    "type": "country",
+    "nameEn": "Papua New Guinea",
+    "nameZh": "巴布亚新几内亚",
+    "isoCode": "PG",
+    "geometryRef": "world#country:PNG"
+  },
+  {
+    "id": "country:EGY",
+    "type": "country",
+    "nameEn": "Egypt",
+    "nameZh": "埃及",
+    "isoCode": "EG",
+    "geometryRef": "world#country:EGY"
+  },
+  {
+    "id": "country:YEM",
+    "type": "country",
+    "nameEn": "Yemen",
+    "nameZh": "也门",
+    "isoCode": "YE",
+    "geometryRef": "world#country:YEM"
+  },
+  {
+    "id": "country:MRT",
+    "type": "country",
+    "nameEn": "Mauritania",
+    "nameZh": "毛里塔尼亚",
+    "isoCode": "MR",
+    "geometryRef": "world#country:MRT"
+  },
+  {
+    "id": "country:GNQ",
+    "type": "country",
+    "nameEn": "Equatorial Guinea",
+    "nameZh": "赤道几内亚",
+    "isoCode": "GQ",
+    "geometryRef": "world#country:GNQ"
+  },
+  {
+    "id": "country:GMB",
+    "type": "country",
+    "nameEn": "The Gambia",
+    "nameZh": "冈比亚",
+    "isoCode": "GM",
+    "geometryRef": "world#country:GMB"
+  },
+  {
+    "id": "country:HKG",
+    "type": "country",
+    "nameEn": "Hong Kong",
+    "nameZh": "香港",
+    "isoCode": "HK",
+    "geometryRef": "world#country:HKG"
+  },
+  {
+    "id": "country:VAT",
+    "type": "country",
+    "nameEn": "Vatican City",
+    "nameZh": "梵蒂冈",
+    "isoCode": "VA",
+    "geometryRef": "world#country:VAT"
+  },
+  {
+    "id": "country:CYN",
+    "type": "country",
+    "nameEn": "Turkish Republic of Northern Cyprus",
+    "nameZh": "北塞浦路斯土耳其共和国",
+    "isoCode": null,
+    "geometryRef": "world#country:CYN"
+  },
+  {
+    "id": "country:CNM",
+    "type": "country",
+    "nameEn": "United Nations Buffer Zone in Cyprus",
+    "nameZh": "塞浦路斯联合国缓冲区",
+    "isoCode": null,
+    "geometryRef": "world#country:CNM"
+  },
+  {
+    "id": "country:KAS",
+    "type": "country",
+    "nameEn": "Siachen Glacier",
+    "nameZh": "锡亚琴冰川",
+    "isoCode": null,
+    "geometryRef": "world#country:KAS"
+  },
+  {
+    "id": "country:KAB",
+    "type": "country",
+    "nameEn": "Baikonur",
+    "nameZh": "拜科努尔",
+    "isoCode": "KZ",
+    "geometryRef": "world#country:KAB"
+  },
+  {
+    "id": "country:WSB",
+    "type": "country",
+    "nameEn": "Akrotiri Sovereign Base Area",
+    "nameZh": "阿克罗蒂里主权基地区",
+    "isoCode": null,
+    "geometryRef": "world#country:WSB"
+  },
+  {
+    "id": "country:SPI",
+    "type": "country",
+    "nameEn": "Southern Patagonian Ice Field",
+    "nameZh": "南巴塔哥尼亞冰原",
+    "isoCode": null,
+    "geometryRef": "world#country:SPI"
+  },
+  {
+    "id": "country:BRT",
+    "type": "country",
+    "nameEn": "Bir Tawil",
+    "nameZh": "比尔泰维勒",
+    "isoCode": null,
+    "geometryRef": "world#country:BRT"
+  },
+  {
+    "id": "country:ATA",
+    "type": "country",
+    "nameEn": "Antarctica",
+    "nameZh": "南极洲",
+    "isoCode": "AQ",
+    "geometryRef": "world#country:ATA"
+  },
+  {
+    "id": "country:AUS",
+    "type": "country",
+    "nameEn": "Australia",
+    "nameZh": "澳大利亚",
+    "isoCode": "AU",
+    "geometryRef": "world#country:AUS"
+  },
+  {
+    "id": "country:GRL",
+    "type": "country",
+    "nameEn": "Greenland",
+    "nameZh": "格陵兰",
+    "isoCode": "GL",
+    "geometryRef": "world#country:GRL"
+  },
+  {
+    "id": "country:FJI",
+    "type": "country",
+    "nameEn": "Fiji",
+    "nameZh": "斐济",
+    "isoCode": "FJ",
+    "geometryRef": "world#country:FJI"
+  },
+  {
+    "id": "country:NZL",
+    "type": "country",
+    "nameEn": "New Zealand",
+    "nameZh": "新西兰",
+    "isoCode": "NZ",
+    "geometryRef": "world#country:NZL"
+  },
+  {
+    "id": "country:NCL",
+    "type": "country",
+    "nameEn": "New Caledonia",
+    "nameZh": "新喀里多尼亚",
+    "isoCode": "NC",
+    "geometryRef": "world#country:NCL"
+  },
+  {
+    "id": "country:MDG",
+    "type": "country",
+    "nameEn": "Madagascar",
+    "nameZh": "马达加斯加",
+    "isoCode": "MG",
+    "geometryRef": "world#country:MDG"
+  },
+  {
+    "id": "country:PHL",
+    "type": "country",
+    "nameEn": "Philippines",
+    "nameZh": "菲律宾",
+    "isoCode": "PH",
+    "geometryRef": "world#country:PHL"
+  },
+  {
+    "id": "country:LKA",
+    "type": "country",
+    "nameEn": "Sri Lanka",
+    "nameZh": "斯里兰卡",
+    "isoCode": "LK",
+    "geometryRef": "world#country:LKA"
+  },
+  {
+    "id": "country:CUW",
+    "type": "country",
+    "nameEn": "Curaçao",
+    "nameZh": "库拉索",
+    "isoCode": "CW",
+    "geometryRef": "world#country:CUW"
+  },
+  {
+    "id": "country:ABW",
+    "type": "country",
+    "nameEn": "Aruba",
+    "nameZh": "阿鲁巴",
+    "isoCode": "AW",
+    "geometryRef": "world#country:ABW"
+  },
+  {
+    "id": "country:BHS",
+    "type": "country",
+    "nameEn": "The Bahamas",
+    "nameZh": "巴哈马",
+    "isoCode": "BS",
+    "geometryRef": "world#country:BHS"
+  },
+  {
+    "id": "country:TCA",
+    "type": "country",
+    "nameEn": "Turks and Caicos Islands",
+    "nameZh": "特克斯和凯科斯群岛",
+    "isoCode": "TC",
+    "geometryRef": "world#country:TCA"
+  },
+  {
+    "id": "country:TWN",
+    "type": "country",
+    "nameEn": "Taiwan",
+    "nameZh": "中华民国",
+    "isoCode": "TW",
+    "geometryRef": "world#country:TWN"
+  },
+  {
+    "id": "country:JPN",
+    "type": "country",
+    "nameEn": "Japan",
+    "nameZh": "日本",
+    "isoCode": "JP",
+    "geometryRef": "world#country:JPN"
+  },
+  {
+    "id": "country:SPM",
+    "type": "country",
+    "nameEn": "Saint Pierre and Miquelon",
+    "nameZh": "圣皮埃尔和密克隆",
+    "isoCode": "PM",
+    "geometryRef": "world#country:SPM"
+  },
+  {
+    "id": "country:ISL",
+    "type": "country",
+    "nameEn": "Iceland",
+    "nameZh": "冰岛",
+    "isoCode": "IS",
+    "geometryRef": "world#country:ISL"
+  },
+  {
+    "id": "country:PCN",
+    "type": "country",
+    "nameEn": "Pitcairn Islands",
+    "nameZh": "皮特凯恩群岛",
+    "isoCode": "PN",
+    "geometryRef": "world#country:PCN"
+  },
+  {
+    "id": "country:PYF",
+    "type": "country",
+    "nameEn": "French Polynesia",
+    "nameZh": "法属波利尼西亚",
+    "isoCode": "PF",
+    "geometryRef": "world#country:PYF"
+  },
+  {
+    "id": "country:ATF",
+    "type": "country",
+    "nameEn": "French Southern and Antarctic Lands",
+    "nameZh": "法属南部和南极领地",
+    "isoCode": "TF",
+    "geometryRef": "world#country:ATF"
+  },
+  {
+    "id": "country:SYC",
+    "type": "country",
+    "nameEn": "Seychelles",
+    "nameZh": "塞舌尔",
+    "isoCode": "SC",
+    "geometryRef": "world#country:SYC"
+  },
+  {
+    "id": "country:KIR",
+    "type": "country",
+    "nameEn": "Kiribati",
+    "nameZh": "基里巴斯",
+    "isoCode": "KI",
+    "geometryRef": "world#country:KIR"
+  },
+  {
+    "id": "country:MHL",
+    "type": "country",
+    "nameEn": "Marshall Islands",
+    "nameZh": "马绍尔群岛",
+    "isoCode": "MH",
+    "geometryRef": "world#country:MHL"
+  },
+  {
+    "id": "country:TTO",
+    "type": "country",
+    "nameEn": "Trinidad and Tobago",
+    "nameZh": "特立尼达和多巴哥",
+    "isoCode": "TT",
+    "geometryRef": "world#country:TTO"
+  },
+  {
+    "id": "country:GRD",
+    "type": "country",
+    "nameEn": "Grenada",
+    "nameZh": "格林纳达",
+    "isoCode": "GD",
+    "geometryRef": "world#country:GRD"
+  },
+  {
+    "id": "country:VCT",
+    "type": "country",
+    "nameEn": "Saint Vincent and the Grenadines",
+    "nameZh": "圣文森特和格林纳丁斯",
+    "isoCode": "VC",
+    "geometryRef": "world#country:VCT"
+  },
+  {
+    "id": "country:BRB",
+    "type": "country",
+    "nameEn": "Barbados",
+    "nameZh": "巴巴多斯",
+    "isoCode": "BB",
+    "geometryRef": "world#country:BRB"
+  },
+  {
+    "id": "country:LCA",
+    "type": "country",
+    "nameEn": "Saint Lucia",
+    "nameZh": "圣卢西亚",
+    "isoCode": "LC",
+    "geometryRef": "world#country:LCA"
+  },
+  {
+    "id": "country:DMA",
+    "type": "country",
+    "nameEn": "Dominica",
+    "nameZh": "多米尼克",
+    "isoCode": "DM",
+    "geometryRef": "world#country:DMA"
+  },
+  {
+    "id": "country:UMI",
+    "type": "country",
+    "nameEn": "United States Minor Outlying Islands",
+    "nameZh": "美国本土外小岛屿",
+    "isoCode": "UM",
+    "geometryRef": "world#country:UMI"
+  },
+  {
+    "id": "country:MSR",
+    "type": "country",
+    "nameEn": "Montserrat",
+    "nameZh": "蒙特塞拉特",
+    "isoCode": "MS",
+    "geometryRef": "world#country:MSR"
+  },
+  {
+    "id": "country:ATG",
+    "type": "country",
+    "nameEn": "Antigua and Barbuda",
+    "nameZh": "安提瓜和巴布达",
+    "isoCode": "AG",
+    "geometryRef": "world#country:ATG"
+  },
+  {
+    "id": "country:KNA",
+    "type": "country",
+    "nameEn": "Saint Kitts and Nevis",
+    "nameZh": "圣基茨和尼维斯",
+    "isoCode": "KN",
+    "geometryRef": "world#country:KNA"
+  },
+  {
+    "id": "country:VIR",
+    "type": "country",
+    "nameEn": "United States Virgin Islands",
+    "nameZh": "美属维尔京群岛",
+    "isoCode": "VI",
+    "geometryRef": "world#country:VIR"
+  },
+  {
+    "id": "country:BLM",
+    "type": "country",
+    "nameEn": "Saint Barthélemy",
+    "nameZh": "圣巴泰勒米",
+    "isoCode": "BL",
+    "geometryRef": "world#country:BLM"
+  },
+  {
+    "id": "country:PRI",
+    "type": "country",
+    "nameEn": "Puerto Rico",
+    "nameZh": "波多黎各",
+    "isoCode": "PR",
+    "geometryRef": "world#country:PRI"
+  },
+  {
+    "id": "country:AIA",
+    "type": "country",
+    "nameEn": "Anguilla",
+    "nameZh": "安圭拉",
+    "isoCode": "AI",
+    "geometryRef": "world#country:AIA"
+  },
+  {
+    "id": "country:VGB",
+    "type": "country",
+    "nameEn": "British Virgin Islands",
+    "nameZh": "英属维尔京群岛",
+    "isoCode": "VG",
+    "geometryRef": "world#country:VGB"
+  },
+  {
+    "id": "country:JAM",
+    "type": "country",
+    "nameEn": "Jamaica",
+    "nameZh": "牙买加",
+    "isoCode": "JM",
+    "geometryRef": "world#country:JAM"
+  },
+  {
+    "id": "country:CYM",
+    "type": "country",
+    "nameEn": "Cayman Islands",
+    "nameZh": "开曼群岛",
+    "isoCode": "KY",
+    "geometryRef": "world#country:CYM"
+  },
+  {
+    "id": "country:BMU",
+    "type": "country",
+    "nameEn": "Bermuda",
+    "nameZh": "百慕大",
+    "isoCode": "BM",
+    "geometryRef": "world#country:BMU"
+  },
+  {
+    "id": "country:HMD",
+    "type": "country",
+    "nameEn": "Heard Island and McDonald Islands",
+    "nameZh": "赫德岛和麦克唐纳群岛",
+    "isoCode": "HM",
+    "geometryRef": "world#country:HMD"
+  },
+  {
+    "id": "country:SHN",
+    "type": "country",
+    "nameEn": "Saint Helena",
+    "nameZh": "圣赫勒拿",
+    "isoCode": "SH",
+    "geometryRef": "world#country:SHN"
+  },
+  {
+    "id": "country:MUS",
+    "type": "country",
+    "nameEn": "Mauritius",
+    "nameZh": "毛里求斯",
+    "isoCode": "MU",
+    "geometryRef": "world#country:MUS"
+  },
+  {
+    "id": "country:COM",
+    "type": "country",
+    "nameEn": "Comoros",
+    "nameZh": "科摩罗",
+    "isoCode": "KM",
+    "geometryRef": "world#country:COM"
+  },
+  {
+    "id": "country:STP",
+    "type": "country",
+    "nameEn": "São Tomé and Príncipe",
+    "nameZh": "圣多美和普林西比",
+    "isoCode": "ST",
+    "geometryRef": "world#country:STP"
+  },
+  {
+    "id": "country:CPV",
+    "type": "country",
+    "nameEn": "Cape Verde",
+    "nameZh": "佛得角",
+    "isoCode": "CV",
+    "geometryRef": "world#country:CPV"
+  },
+  {
+    "id": "country:MLT",
+    "type": "country",
+    "nameEn": "Malta",
+    "nameZh": "马耳他",
+    "isoCode": "MT",
+    "geometryRef": "world#country:MLT"
+  },
+  {
+    "id": "country:JEY",
+    "type": "country",
+    "nameEn": "Jersey",
+    "nameZh": "泽西",
+    "isoCode": "JE",
+    "geometryRef": "world#country:JEY"
+  },
+  {
+    "id": "country:GGY",
+    "type": "country",
+    "nameEn": "Guernsey",
+    "nameZh": "根西",
+    "isoCode": "GG",
+    "geometryRef": "world#country:GGY"
+  },
+  {
+    "id": "country:IMN",
+    "type": "country",
+    "nameEn": "Isle of Man",
+    "nameZh": "马恩岛",
+    "isoCode": "IM",
+    "geometryRef": "world#country:IMN"
+  },
+  {
+    "id": "country:ALD",
+    "type": "country",
+    "nameEn": "Åland",
+    "nameZh": "奥兰",
+    "isoCode": "AX",
+    "geometryRef": "world#country:ALD"
+  },
+  {
+    "id": "country:FRO",
+    "type": "country",
+    "nameEn": "Faroe Islands",
+    "nameZh": "法罗群岛",
+    "isoCode": "FO",
+    "geometryRef": "world#country:FRO"
+  },
+  {
+    "id": "country:IOA",
+    "type": "country",
+    "nameEn": "Australian Indian Ocean Territories",
+    "nameZh": "澳屬印度洋領地",
+    "isoCode": "AU",
+    "geometryRef": "world#country:IOA"
+  },
+  {
+    "id": "country:IOT",
+    "type": "country",
+    "nameEn": "British Indian Ocean Territory",
+    "nameZh": "英属印度洋领地",
+    "isoCode": "IO",
+    "geometryRef": "world#country:IOT"
+  },
+  {
+    "id": "country:SGP",
+    "type": "country",
+    "nameEn": "Singapore",
+    "nameZh": "新加坡",
+    "isoCode": "SG",
+    "geometryRef": "world#country:SGP"
+  },
+  {
+    "id": "country:NFK",
+    "type": "country",
+    "nameEn": "Norfolk Island",
+    "nameZh": "诺福克岛",
+    "isoCode": "NF",
+    "geometryRef": "world#country:NFK"
+  },
+  {
+    "id": "country:COK",
+    "type": "country",
+    "nameEn": "Cook Islands",
+    "nameZh": "库克群岛",
+    "isoCode": "CK",
+    "geometryRef": "world#country:COK"
+  },
+  {
+    "id": "country:TON",
+    "type": "country",
+    "nameEn": "Tonga",
+    "nameZh": "汤加",
+    "isoCode": "TO",
+    "geometryRef": "world#country:TON"
+  },
+  {
+    "id": "country:WLF",
+    "type": "country",
+    "nameEn": "Wallis and Futuna",
+    "nameZh": "瓦利斯和富图纳",
+    "isoCode": "WF",
+    "geometryRef": "world#country:WLF"
+  },
+  {
+    "id": "country:WSM",
+    "type": "country",
+    "nameEn": "Samoa",
+    "nameZh": "萨摩亚",
+    "isoCode": "WS",
+    "geometryRef": "world#country:WSM"
+  },
+  {
+    "id": "country:SLB",
+    "type": "country",
+    "nameEn": "Solomon Islands",
+    "nameZh": "所罗门群岛",
+    "isoCode": "SB",
+    "geometryRef": "world#country:SLB"
+  },
+  {
+    "id": "country:TUV",
+    "type": "country",
+    "nameEn": "Tuvalu",
+    "nameZh": "图瓦卢",
+    "isoCode": "TV",
+    "geometryRef": "world#country:TUV"
+  },
+  {
+    "id": "country:MDV",
+    "type": "country",
+    "nameEn": "Maldives",
+    "nameZh": "马尔代夫",
+    "isoCode": "MV",
+    "geometryRef": "world#country:MDV"
+  },
+  {
+    "id": "country:NRU",
+    "type": "country",
+    "nameEn": "Nauru",
+    "nameZh": "瑙鲁",
+    "isoCode": "NR",
+    "geometryRef": "world#country:NRU"
+  },
+  {
+    "id": "country:FSM",
+    "type": "country",
+    "nameEn": "Federated States of Micronesia",
+    "nameZh": "密克罗尼西亚联邦",
+    "isoCode": "FM",
+    "geometryRef": "world#country:FSM"
+  },
+  {
+    "id": "country:SGS",
+    "type": "country",
+    "nameEn": "South Georgia and the South Sandwich Islands",
+    "nameZh": "南乔治亚和南桑威奇群岛",
+    "isoCode": "GS",
+    "geometryRef": "world#country:SGS"
+  },
+  {
+    "id": "country:FLK",
+    "type": "country",
+    "nameEn": "Falkland Islands",
+    "nameZh": "福克兰群岛",
+    "isoCode": "FK",
+    "geometryRef": "world#country:FLK"
+  },
+  {
+    "id": "country:VUT",
+    "type": "country",
+    "nameEn": "Vanuatu",
+    "nameZh": "瓦努阿图",
+    "isoCode": "VU",
+    "geometryRef": "world#country:VUT"
+  },
+  {
+    "id": "country:NIU",
+    "type": "country",
+    "nameEn": "Niue",
+    "nameZh": "纽埃",
+    "isoCode": "NU",
+    "geometryRef": "world#country:NIU"
+  },
+  {
+    "id": "country:ASM",
+    "type": "country",
+    "nameEn": "American Samoa",
+    "nameZh": "美属萨摩亚",
+    "isoCode": "AS",
+    "geometryRef": "world#country:ASM"
+  },
+  {
+    "id": "country:PLW",
+    "type": "country",
+    "nameEn": "Palau",
+    "nameZh": "帕劳",
+    "isoCode": "PW",
+    "geometryRef": "world#country:PLW"
+  },
+  {
+    "id": "country:GUM",
+    "type": "country",
+    "nameEn": "Guam",
+    "nameZh": "关岛",
+    "isoCode": "GU",
+    "geometryRef": "world#country:GUM"
+  },
+  {
+    "id": "country:MNP",
+    "type": "country",
+    "nameEn": "Northern Mariana Islands",
+    "nameZh": "北马里亚纳群岛",
+    "isoCode": "MP",
+    "geometryRef": "world#country:MNP"
+  },
+  {
+    "id": "country:BHR",
+    "type": "country",
+    "nameEn": "Bahrain",
+    "nameZh": "巴林",
+    "isoCode": "BH",
+    "geometryRef": "world#country:BHR"
+  },
+  {
+    "id": "country:CSI",
+    "type": "country",
+    "nameEn": "Coral Sea Islands",
+    "nameZh": "珊瑚海群岛",
+    "isoCode": "AU",
+    "geometryRef": "world#country:CSI"
+  },
+  {
+    "id": "country:PGA",
+    "type": "country",
+    "nameEn": "Wake Island",
+    "nameZh": "威克岛",
+    "isoCode": null,
+    "geometryRef": "world#country:PGA"
+  },
+  {
+    "id": "country:CLP",
+    "type": "country",
+    "nameEn": "Clipperton Island",
+    "nameZh": "克利珀顿岛",
+    "isoCode": "FR",
+    "geometryRef": "world#country:CLP"
+  },
+  {
+    "id": "country:MAC",
+    "type": "country",
+    "nameEn": "Macau",
+    "nameZh": "澳门",
+    "isoCode": "MO",
+    "geometryRef": "world#country:MAC"
+  },
+  {
+    "id": "country:ATC",
+    "type": "country",
+    "nameEn": "Ashmore and Cartier Islands",
+    "nameZh": "阿什莫尔和卡捷群岛",
+    "isoCode": "AU",
+    "geometryRef": "world#country:ATC"
+  },
+  {
+    "id": "country:BJN",
+    "type": "country",
+    "nameEn": "Bajo Nuevo Bank",
+    "nameZh": "巴霍努埃沃浅滩",
+    "isoCode": null,
+    "geometryRef": "world#country:BJN"
+  },
+  {
+    "id": "country:SER",
+    "type": "country",
+    "nameEn": "Serranilla Bank",
+    "nameZh": "塞拉尼拉浅滩",
+    "isoCode": null,
+    "geometryRef": "world#country:SER"
+  },
+  {
+    "id": "country:SCR",
+    "type": "country",
+    "nameEn": "Scarborough Shoal",
+    "nameZh": "黄岩岛",
+    "isoCode": null,
+    "geometryRef": "world#country:SCR"
+  },
+  {
+    "id": "province:CN-XJ",
+    "type": "china_province",
+    "nameEn": "Xinjiang",
+    "nameZh": "新疆维吾尔自治区",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-XJ"
+  },
+  {
+    "id": "province:CN-XZ",
+    "type": "china_province",
+    "nameEn": "Tibet",
+    "nameZh": "西藏自治区",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-XZ"
+  },
+  {
+    "id": "province:CN-NM",
+    "type": "china_province",
+    "nameEn": "Inner Mongolia",
+    "nameZh": "内蒙古自治区",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-NM"
+  },
+  {
+    "id": "province:CN-GS",
+    "type": "china_province",
+    "nameEn": "Gansu",
+    "nameZh": "甘肃省",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-GS"
+  },
+  {
+    "id": "province:CN-YN",
+    "type": "china_province",
+    "nameEn": "Yunnan",
+    "nameZh": "云南省",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-YN"
+  },
+  {
+    "id": "province:CN-HL",
+    "type": "china_province",
+    "nameEn": "Heilongjiang",
+    "nameZh": "黑龙江省",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-HL"
+  },
+  {
+    "id": "province:CN-JL",
+    "type": "china_province",
+    "nameEn": "Jilin",
+    "nameZh": "吉林省",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-JL"
+  },
+  {
+    "id": "province:CN-LN",
+    "type": "china_province",
+    "nameEn": "Liaoning",
+    "nameZh": "辽宁省",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-LN"
+  },
+  {
+    "id": "province:CN-GX",
+    "type": "china_province",
+    "nameEn": "Guangxi",
+    "nameZh": "广西壮族自治区",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-GX"
+  },
+  {
+    "id": "province:CN-GD",
+    "type": "china_province",
+    "nameEn": "Guangdong",
+    "nameZh": "广东省",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-GD"
+  },
+  {
+    "id": "province:CN-HI",
+    "type": "china_province",
+    "nameEn": "Hainan",
+    "nameZh": "海南省",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-HI"
+  },
+  {
+    "id": "province:CN-FJ",
+    "type": "china_province",
+    "nameEn": "Fujian",
+    "nameZh": "福建省",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-FJ"
+  },
+  {
+    "id": "province:CN-ZJ",
+    "type": "china_province",
+    "nameEn": "Zhejiang",
+    "nameZh": "浙江省",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-ZJ"
+  },
+  {
+    "id": "province:CN-SH",
+    "type": "china_province",
+    "nameEn": "Shanghai",
+    "nameZh": "上海市",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-SH"
+  },
+  {
+    "id": "province:CN-JS",
+    "type": "china_province",
+    "nameEn": "Jiangsu",
+    "nameZh": "江苏省",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-JS"
+  },
+  {
+    "id": "province:CN-SD",
+    "type": "china_province",
+    "nameEn": "Shandong",
+    "nameZh": "山东省",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-SD"
+  },
+  {
+    "id": "province:CN-HE",
+    "type": "china_province",
+    "nameEn": "Hebei",
+    "nameZh": "河北省",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-HE"
+  },
+  {
+    "id": "province:CN-TJ",
+    "type": "china_province",
+    "nameEn": "Tianjin",
+    "nameZh": "天津市",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-TJ"
+  },
+  {
+    "id": "province:CN-BJ",
+    "type": "china_province",
+    "nameEn": "Beijing",
+    "nameZh": "北京市",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-BJ"
+  },
+  {
+    "id": "province:CN-SC",
+    "type": "china_province",
+    "nameEn": "Sichuan",
+    "nameZh": "四川省",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-SC"
+  },
+  {
+    "id": "province:CN-CQ",
+    "type": "china_province",
+    "nameEn": "Chongqing",
+    "nameZh": "重庆市",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-CQ"
+  },
+  {
+    "id": "province:CN-GZ",
+    "type": "china_province",
+    "nameEn": "Guizhou",
+    "nameZh": "贵州省",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-GZ"
+  },
+  {
+    "id": "province:CN-HN",
+    "type": "china_province",
+    "nameEn": "Hunan",
+    "nameZh": "湖南省",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-HN"
+  },
+  {
+    "id": "province:CN-NX",
+    "type": "china_province",
+    "nameEn": "Ningxia",
+    "nameZh": "宁夏回族自治区",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-NX"
+  },
+  {
+    "id": "province:CN-SN",
+    "type": "china_province",
+    "nameEn": "Shaanxi",
+    "nameZh": "陕西省",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-SN"
+  },
+  {
+    "id": "province:CN-QH",
+    "type": "china_province",
+    "nameEn": "Qinghai",
+    "nameZh": "青海省",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-QH"
+  },
+  {
+    "id": "province:CN-SX",
+    "type": "china_province",
+    "nameEn": "Shanxi",
+    "nameZh": "山西省",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-SX"
+  },
+  {
+    "id": "province:CN-JX",
+    "type": "china_province",
+    "nameEn": "Jiangxi",
+    "nameZh": "江西省",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-JX"
+  },
+  {
+    "id": "province:CN-HA",
+    "type": "china_province",
+    "nameEn": "Henan",
+    "nameZh": "河南省",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-HA"
+  },
+  {
+    "id": "province:CN-HB",
+    "type": "china_province",
+    "nameEn": "Hubei",
+    "nameZh": "湖北省",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-HB"
+  },
+  {
+    "id": "province:CN-AH",
+    "type": "china_province",
+    "nameEn": "Anhui",
+    "nameZh": "安徽省",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-AH"
+  },
+  {
+    "id": "province:CN-HK",
+    "type": "china_province",
+    "nameEn": "Hong Kong",
+    "nameZh": "香港特别行政区",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-HK"
+  },
+  {
+    "id": "province:CN-MO",
+    "type": "china_province",
+    "nameEn": "Macau",
+    "nameZh": "澳门特别行政区",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-MO"
+  },
+  {
+    "id": "province:CN-TW",
+    "type": "china_province",
+    "nameEn": "Taiwan",
+    "nameZh": "台湾",
+    "parentId": "country:CHN",
+    "geometryRef": "china#province:CN-TW"
+  }
+]
