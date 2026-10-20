@@ -28,6 +28,7 @@ select public.test_assert((select count(*)=2 from public.travel_entries),'multip
 select public.test_denied($q$select public.apply_operation('10000000-0000-4000-8000-000000000008','journal','20000000-0000-4000-8000-000000000003',0,'{"place_id":"country:FRA","start_date":"2025-02-02","end_date":"2025-01-01","cities":[],"note":"","deleted":false}')$q$,'23514');
 select public.apply_operation('10000000-0000-4000-8000-000000000011','journal','20000000-0000-4000-8000-000000000002',1,'{"place_id":"country:FRA","start_date":null,"end_date":null,"cities":[],"note":"Another trip","deleted":true}');
 select public.test_assert((public.apply_operation('10000000-0000-4000-8000-000000000012','journal','20000000-0000-4000-8000-000000000002',1,'{"place_id":"country:FRA","start_date":null,"end_date":null,"cities":[],"note":"Stale edit","deleted":false}')->>'ok')='false','stale edit cannot resurrect a deleted trip');
+select public.create_invitation()->>'token' as pre_disconnect_token \gset
 select public.create_invitation()->>'token' as decline_token \gset
 select public.create_invitation()->>'token' as token \gset
 select public.create_invitation()->>'token' as expired \gset
@@ -68,6 +69,15 @@ select public.disconnect_friend(:'connection_id');
 select public.test_assert((select count(*)=0 from public.place_records),'disconnect revokes access immediately');
 select public.test_denied($q$select public.friend_map('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa')$q$,'42501');
 select public.test_assert((select count(*)=0 from public.list_friends()),'disconnected friend is not listed');
+select public.test_denied(format('select public.preview_invitation(%L)',:'pre_disconnect_token'),'P0001');
+select public.test_denied(format('select public.respond_invitation(%L,true)',:'pre_disconnect_token'),'P0001');
+select public.test_assert((select count(*)=0 from public.place_records),'old unused invitation cannot restore disconnected access');
+select public.create_invitation()->>'token' as fresh_token \gset
+set request.jwt.claim.sub='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
+select public.respond_invitation(:'fresh_token',true);
+set request.jwt.claim.sub='bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb';
+select public.test_assert((select count(*)=1 from public.place_records),'fresh invitation and explicit acceptance can reconnect');
+select public.disconnect_friend(:'connection_id');
 set request.jwt.claim.sub='cccccccc-cccc-4ccc-8ccc-cccccccccccc';
 select public.ensure_profile('Charlie');
 select public.test_assert((select count(*)=0 from public.place_records),'unrelated third user has no access');

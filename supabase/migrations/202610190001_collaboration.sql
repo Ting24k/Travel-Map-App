@@ -154,11 +154,12 @@ begin
  if p_token !~ '^[a-f0-9]{64}$' then raise exception 'Invalid invitation';end if;
  select * into r from public.invitations where token_hash=encode(sha256(convert_to(p_token,'UTF8')),'hex');
  if not found or r.status<>'pending' or r.expires_at<=now() or r.created_by=auth.uid() then raise exception 'Invitation unavailable, expired or already used';end if;
+ if exists(select 1 from public.connections c where c.user_a=least(auth.uid(),r.created_by) and c.user_b=greatest(auth.uid(),r.created_by) and c.status='disconnected' and r.created_at<=c.updated_at) then raise exception 'Invitation predates disconnect; request a fresh invitation';end if;
  select display_name into n from public.profiles where id=r.created_by;
  return jsonb_build_object('display_name',n,'expires_at',r.expires_at);
 end $$;
 create function public.respond_invitation(p_token text,p_accept boolean) returns uuid language plpgsql security definer set search_path='' as $$
-declare r public.invitations;u uuid:=auth.uid();cid uuid;
+declare r public.invitations;u uuid:=auth.uid();cid uuid;existing_connection public.connections;
 begin
  if u is null then raise exception 'Authentication required' using errcode='42501';end if;
  if p_token !~ '^[a-f0-9]{64}$' then raise exception 'Invalid invitation';end if;
@@ -166,6 +167,8 @@ begin
  if not found or r.status<>'pending' or r.expires_at<=now() or r.created_by=u then raise exception 'Invitation unavailable, expired or already used';end if;
  if not exists(select 1 from public.profiles where id=u) then raise exception 'Create your profile first';end if;
  if p_accept then
+  select * into existing_connection from public.connections where user_a=least(u,r.created_by) and user_b=greatest(u,r.created_by) for update;
+  if found and existing_connection.status='disconnected' and r.created_at<=existing_connection.updated_at then raise exception 'Invitation predates disconnect; request a fresh invitation';end if;
   insert into public.connections(user_a,user_b,status) values(least(u,r.created_by),greatest(u,r.created_by),'accepted')
    on conflict(user_a,user_b) do update set status='accepted',updated_at=clock_timestamp() returning id into cid;
  end if;
