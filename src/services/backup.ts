@@ -2,6 +2,7 @@ import {validateEntry} from "../collaboration/model";
 import type {PlaceRecord,TravelEntry} from "../collaboration/types";
 import type { TravelData } from "../types";
 import { placeById, places } from "../data/catalog";
+export const MAX_BACKUP_BYTES=16*1024*1024;
 const color = /^#[0-9a-f]{6}$/i;
 const record = (x: unknown): x is Record<string, unknown> =>
   !!x && typeof x === "object" && !Array.isArray(x);
@@ -99,12 +100,14 @@ export function validateBackup(value: unknown): TravelData {
   };
 }
 export function parseBackup(text: string) {
-  if (new TextEncoder().encode(text).length > 2 * 1024 * 1024)
+  if (new TextEncoder().encode(text).length > MAX_BACKUP_BYTES)
     throw Error("Backup too large");
   return validateBackup(JSON.parse(text));
 }
 export function serializeBackup(data: TravelData) {
-  return JSON.stringify(validateBackup(data.schemaVersion===2?{...data,records:data.records||[],entries:data.entries||[]}:data), null, 2);
+  const json=JSON.stringify(validateBackup(data.schemaVersion===2?{...data,records:data.records||[],entries:data.entries||[]}:data), null, 2);
+  if(new TextEncoder().encode(json).length>MAX_BACKUP_BYTES)throw Error('Backup exceeds the supported 16 MiB limit. Your records have not changed.');
+  return json;
 }
 export function downloadBlob(blob: Blob, name: string) {
   const url = URL.createObjectURL(blob);

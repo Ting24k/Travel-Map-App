@@ -8,6 +8,7 @@ import {
   isVisited,
   statusFor,
   setStatus,
+  effectiveStatus,
 } from "../services/travel";
 import type { Place, TravelData } from "../types";
 import {collaborationMessages} from "../collaboration/i18n";
@@ -37,8 +38,9 @@ export default function PlaceSheet({
     lang = data.preferences.language;
   const custom = data.appearances.find(
     (a) => a.placeId === place.id,
-  )?.customColor;
-  const color = custom || data.preferences.defaultVisitedColor;
+  )?.customColor || data.records?.find(r=>r.place_id===place.id)?.custom_color;
+  const status=effectiveStatus(data,place.id);
+  const color = custom || (status==='wishlist'?'#d5ba79':status==='lived'?'#aa9bc1':data.preferences.defaultVisitedColor);
   const derived = place.id === "country:CHN" && derivedChina(data);
   return (
     <Modal

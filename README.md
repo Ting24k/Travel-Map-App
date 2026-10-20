@@ -1,6 +1,21 @@
 # Our Little World 🌍
 
-A warm, local-first travel map for the places you carry with you. React + TypeScript + D3 + Dexie, with English / 简体中文 and an installable offline PWA. No accounts, backend, analytics, or map API keys.
+A warm travel map for the places you carry with you. React + TypeScript + D3 + Dexie, with English / 简体中文, an offline PWA, and optional Supabase accounts for secure cross-device synchronization and read-only friend comparison. No analytics or external map API keys.
+
+**Collaborative upgrade:** follow [Supabase setup](docs/SUPABASE-SETUP.md) to enable email-code sign-in, invitations, cloud records, wishlist and private journals. Existing local records remain on the original browser until you explicitly preview and confirm an import. Without backend configuration the app still works locally. See [architecture and conflict policy](docs/COLLABORATION-ARCHITECTURE.md) and [upgrade validation](docs/UPGRADE-VALIDATION.md) for what was actually tested and what still needs a live project.
+
+## Collaborative features
+
+- Email OTP sign-in, persistent sessions, session recovery and sign-out.
+- Auth UUID-scoped cache, durable offline operations, server revision checks, idempotent retries and explicit conflict resolution.
+- Previewed local/JSON import with duplicate handling, original backup recovery and per-account migration markers.
+- Expiring hashed invitations, accept/decline/revoke, canonical mutual connections and disconnect.
+- My map, friend map, both visited and four-color comparison on both geographic catalogs; friend views are read-only and require online authorization.
+- Unvisited / wishlist / visited / lived statuses, personal colors, wishlist filters and pair statistics.
+- Multiple private journal trips per place, dates, cities, notes, edit/delete, sorting, filtering and offline caching.
+- Production SQL migrations and RLS authorization tests on disposable PostgreSQL.
+
+Primary navigation is Map / Journal / Statistics / Friends; Settings is under the Account button. Browse all places from the map toolbar. The original geographic assets and all verified boundaries remain unchanged.
 
 ## Run locally
 
@@ -14,10 +29,14 @@ npm run dev
 Open the address Vite prints. Production checks:
 
 ```sh
+npm run lint
+npm run typecheck
 npm test
 npm run build
 npm run preview
 npm run test:e2e
+npm run test:cloud     # isolated-session test API, not live Supabase
+npm run test:security  # Docker + postgres:17-alpine; no production database
 ```
 
 Playwright uses system Chromium on this cloud machine. Elsewhere install its browser with `npx playwright install --with-deps chromium` (Linux) or `npx playwright install chromium` (macOS/Windows). Set `CHROMIUM_PATH` if your Chromium is elsewhere. CI uses Playwright's bundled Chromium. End-to-end tests target the **production build**, start their own preview on port 4173, and run both desktop and iPhone 13-sized Chromium. Run a fresh build first. A service worker is only installed in production, not by the Vite development server.
@@ -59,9 +78,9 @@ npm run build
 
 Travel records stay in this browser's IndexedDB. **Export backups regularly**: deleting site data, private browsing, OS/browser storage eviction, or removing an installed app may erase them. Browsers and devices do not automatically synchronize. Safari and Home Screen storage behavior varies by iOS version. Requesting persistent storage is advisory, not a guarantee; your JSON backup is the portable copy.
 
-Restore accepts schema version 1, known place IDs, matching profile ownership, unique records, valid timestamps, strict six-digit hex colors, and supported preferences. Files over 2 MiB and incompatible formats are rejected without replacement. A restore atomically replaces the local profile and all its records only after confirmation. JSON backups contain personal travel history; keep them private. PNG export shares only the visible map plus title, count, legend, and attribution. Sharing the app URL shares no records.
+Restore accepts schema version 1, known place IDs, matching profile ownership, unique records, valid timestamps, strict six-digit hex colors, and supported preferences. Files over 16 MiB and incompatible formats are rejected without replacement. A restore atomically replaces the local profile and all its records only after confirmation. JSON backups contain personal travel history; keep them private. PNG export shares only the visible map plus title, count, legend, and attribution. Sharing the app URL shares no records.
 
-There is intentionally no authentication, cloud sync, friend-map access, or public user identifier. See [architecture and future multiuser boundaries](docs/ARCHITECTURE.md).
+Authentication, cloud sync and accepted-friend map access are optional and configured through Supabase. Private journal data is never shared. A normal app URL grants no access; only an explicit authenticated invitation acceptance creates a connection. See [collaboration architecture](docs/COLLABORATION-ARCHITECTURE.md).
 
 ## Deploy free to GitHub Pages
 
@@ -98,7 +117,7 @@ Open the deployed HTTPS app in **Safari → Share → Add to Home Screen → Add
 4. **Sharing/statistics:** catalog-derived totals, validated JSON backup and confirmed restore, real PNG signature/dimensions checked in browser tests.
 5. **Polish/validation:** mobile layout, keyboard/modal behavior, no horizontal overflow, production service-worker caching, offline reload with saved records, switching to an unvisited map offline, production build and dependency audit.
 
-`npm test` runs unit tests; `npm run test:e2e` runs production browser checks. See [validation results](docs/VALIDATION.md) for measured outcomes and external limitations. Remaining external acceptance: physical iPhone Safari and a verified live hosting deployment. Future account/cloud-sharing features are architecture only, as requested.
+`npm test` runs unit tests; `npm run test:e2e` runs production browser checks. See [baseline MVP validation](docs/VALIDATION.md) and [collaborative upgrade validation](docs/UPGRADE-VALIDATION.md) for measured outcomes and external limitations. Remaining external acceptance: physical iPhone Safari and a verified live hosting deployment. Live Supabase and real-device checks are separately tracked in the upgrade validation report.
 
 ## Source layout
 

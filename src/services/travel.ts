@@ -38,11 +38,11 @@ export function isVisited(data: TravelData, id: string) {
   );
 }
 export function colorFor(data: TravelData, id: string) {
-  const status=statusFor(data,id);
+  const status=effectiveStatus(data,id);
   return isVisited(data, id)||status==="wishlist"
     ? data.appearances.find(
         (a) => a.userId === data.profile.id && a.placeId === id,
-      )?.customColor || (status==="wishlist"?"#d5ba79":status==="lived"?"#aa9bc1":data.preferences.defaultVisitedColor)
+      )?.customColor || data.records?.find(r=>r.place_id===id&&r.user_id===data.profile.id)?.custom_color || (status==="wishlist"?"#d5ba79":status==="lived"?"#aa9bc1":data.preferences.defaultVisitedColor)
     : "#dedfd5";
 }
 export function setVisit(
@@ -94,5 +94,7 @@ export function statistics(data: TravelData, mode: MapMode) {
 export function setStatus(data:TravelData,place:Place,status:import("../collaboration/types").TravelStatus):TravelData {
  const updated=setVisit(data,place,status==="visited"||status==="lived");
  const old=data.records?.find(r=>r.place_id===place.id);
- return {...updated,schemaVersion:2,records:[...(data.records||[]).filter(r=>r.place_id!==place.id),{user_id:data.profile.id,place_id:place.id,status,custom_color:data.appearances.find(a=>a.placeId===place.id)?.customColor||null,revision:old?.revision||0,updated_at:new Date().toISOString()}]};
+ return {...updated,schemaVersion:2,records:[...(data.records||[]).filter(r=>r.place_id!==place.id),{user_id:data.profile.id,place_id:place.id,status,custom_color:data.appearances.find(a=>a.placeId===place.id)?.customColor||old?.custom_color||null,revision:old?.revision||0,updated_at:new Date().toISOString()}]};
 }
+
+export function effectiveStatus(data:TravelData,id:string):import("../collaboration/types").TravelStatus{const status=statusFor(data,id);return id==='country:CHN'&&derivedChina(data)&&!['visited','lived'].includes(status)?'visited':status}

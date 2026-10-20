@@ -20,6 +20,9 @@ select public.apply_operation('10000000-0000-4000-8000-000000000006','journal','
 select public.apply_operation('10000000-0000-4000-8000-000000000007','journal','20000000-0000-4000-8000-000000000002',0,'{"place_id":"country:FRA","start_date":null,"end_date":null,"cities":[],"note":"Another trip","deleted":false}');
 select public.test_assert((select count(*)=2 from public.travel_entries),'multiple trips per place');
 select public.test_denied($q$select public.apply_operation('10000000-0000-4000-8000-000000000008','journal','20000000-0000-4000-8000-000000000003',0,'{"place_id":"country:FRA","start_date":"2025-02-02","end_date":"2025-01-01","cities":[],"note":"","deleted":false}')$q$,'23514');
+select public.apply_operation('10000000-0000-4000-8000-000000000011','journal','20000000-0000-4000-8000-000000000002',1,'{"place_id":"country:FRA","start_date":null,"end_date":null,"cities":[],"note":"Another trip","deleted":true}');
+select public.test_assert((public.apply_operation('10000000-0000-4000-8000-000000000012','journal','20000000-0000-4000-8000-000000000002',1,'{"place_id":"country:FRA","start_date":null,"end_date":null,"cities":[],"note":"Stale edit","deleted":false}')->>'ok')='false','stale edit cannot resurrect a deleted trip');
+select public.create_invitation()->>'token' as decline_token \gset
 select public.create_invitation()->>'token' as token \gset
 select public.create_invitation()->>'token' as expired \gset
 select public.create_invitation()->>'token' as revoked \gset
@@ -35,12 +38,18 @@ select public.ensure_profile('Bob');
 select public.test_assert((select count(*)=0 from public.place_records),'unrelated B cannot read A before connection');
 select public.test_assert((select count(*)=0 from public.profiles where id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'),'private profile hidden');
 select public.test_assert((select count(*)=0 from public.travel_entries),'private journal hidden');
+select public.test_denied($q$select public.friend_map('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa')$q$,'42501');
 select public.test_denied($q$insert into public.connections(user_a,user_b,status) values('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa','bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb','accepted')$q$,'42501');
 select public.test_denied(format('select public.respond_invitation(%L,true)',:'expired'),'P0001');
 select public.test_denied(format('select public.respond_invitation(%L,true)',:'revoked'),'P0001');
 select public.test_assert((public.preview_invitation(:'token')->>'display_name')='Alice','preview scoped to token');
+select public.respond_invitation(:'decline_token',false);
+select public.test_denied(format('select public.respond_invitation(%L,true)',:'decline_token'),'P0001');
 select public.respond_invitation(:'token',true) as connection_id \gset
 select public.test_assert((select count(*)=1 from public.place_records),'accepted friend can read place record');
+select public.test_assert((public.friend_map('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa')->'records'->0->>'status')='visited','shared map projection works');
+select public.test_assert(not (public.friend_map('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa') ? 'entries'),'shared map has no journal');
+select public.test_assert(not (public.friend_map('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa') ? 'preferences'),'private preferences omitted');
 select public.test_assert((select count(*)=0 from public.travel_entries),'accepted friend cannot read journals');
 select public.test_assert((select count(*)=0 from public.profiles where id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'),'friend cannot read private preferences');
 select public.test_assert((select display_name='Alice' from public.list_friends()),'only necessary friend profile exposed');
@@ -51,6 +60,7 @@ select public.test_denied($q$select public.apply_operation('10000000-0000-4000-8
 select public.test_denied($q$select public.apply_operation('10000000-0000-4000-8000-000000000010','journal','20000000-0000-4000-8000-000000000001',0,'{"place_id":"country:FRA","start_date":null,"end_date":null,"cities":[],"note":"Forged","deleted":false}')$q$,'42501');
 select public.disconnect_friend(:'connection_id');
 select public.test_assert((select count(*)=0 from public.place_records),'disconnect revokes access immediately');
+select public.test_denied($q$select public.friend_map('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa')$q$,'42501');
 select public.test_assert((select count(*)=0 from public.list_friends()),'disconnected friend is not listed');
 set request.jwt.claim.sub='cccccccc-cccc-4ccc-8ccc-cccccccccccc';
 select public.ensure_profile('Charlie');
