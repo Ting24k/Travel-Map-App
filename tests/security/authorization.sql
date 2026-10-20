@@ -13,6 +13,12 @@ select public.test_assert((select count(*)=1 from public.place_records),'owner c
 select public.test_assert((public.apply_operation('10000000-0000-4000-8000-000000000001','place','country:FRA',0,'{"status":"visited","custom_color":"#123456"}')->'row'->>'revision')='1','idempotent retry');
 select public.test_assert((public.apply_operation('10000000-0000-4000-8000-000000000002','place','country:FRA',0,'{"status":"wishlist","custom_color":null}')->>'ok')='false','stale write rejected');
 select public.test_assert((select status='visited' from public.place_records where place_id='country:FRA'),'conflict did not overwrite');
+select public.test_denied($q$select public.apply_operation('10000000-0000-4000-8000-000000000090','place','country:FRA',null,'{"status":"wishlist","custom_color":null}')$q$,'22023');
+select public.test_denied($q$select public.apply_operation('10000000-0000-4000-8000-000000000091',null,'country:FRA',1,'{"status":"wishlist","custom_color":null}')$q$,'22023');
+select public.test_denied($q$select public.apply_operation('10000000-0000-4000-8000-000000000092','place',null,1,'{"status":"wishlist","custom_color":null}')$q$,'22023');
+select public.test_denied($q$select public.apply_operation('10000000-0000-4000-8000-000000000093','place','country:FRA',1,null)$q$,'22023');
+select public.test_denied($q$select public.apply_operation(null,'place','country:FRA',1,'{"status":"wishlist","custom_color":null}')$q$,'22023');
+select public.test_assert((select status='visited' from public.place_records where place_id='country:FRA'),'malformed operations cannot bypass revision checks');
 select public.test_denied($q$select public.apply_operation('10000000-0000-4000-8000-000000000003','place','country:FRA',1,'{"status":"oops","custom_color":null}')$q$,'23514');
 select public.test_denied($q$select public.apply_operation('10000000-0000-4000-8000-000000000004','place','country:FRA',1,'{"status":"visited","custom_color":"red"}')$q$,'23514');
 select public.test_denied($q$select public.apply_operation('10000000-0000-4000-8000-000000000005','place','made-up',0,'{"status":"visited","custom_color":null}')$q$,'23503');

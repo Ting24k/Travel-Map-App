@@ -89,7 +89,7 @@ create function public.apply_operation(p_operation_id uuid,p_kind text,p_entity_
 declare u uuid:=auth.uid(); req jsonb; prior public.operation_receipts; current_row jsonb; result_row jsonb; result jsonb; rev bigint;
 begin
  if u is null then raise exception 'Authentication required' using errcode='42501';end if;
- if p_base_revision<0 or p_kind not in ('place','journal','profile') or jsonb_typeof(p_payload)<>'object' then raise exception 'Invalid operation';end if;
+ if p_operation_id is null or p_entity_id is null or p_base_revision is null or p_base_revision<0 or p_kind is null or p_kind not in ('place','journal','profile') or jsonb_typeof(p_payload) is distinct from 'object' then raise exception 'Invalid operation' using errcode='22023';end if;
  req:=jsonb_build_object('kind',p_kind,'entity',p_entity_id,'base',p_base_revision,'payload',p_payload);
  perform pg_advisory_xact_lock(hashtextextended(u::text,0));
  select * into prior from public.operation_receipts where user_id=u and id=p_operation_id;
