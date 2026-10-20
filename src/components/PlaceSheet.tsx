@@ -6,8 +6,11 @@ import {
   setVisit,
   setColor,
   isVisited,
+  statusFor,
+  setStatus,
 } from "../services/travel";
 import type { Place, TravelData } from "../types";
+import {collaborationMessages} from "../collaboration/i18n";
 import { messages } from "../data/i18n";
 export const palette = [
   "#88a48b",
@@ -22,13 +25,15 @@ export default function PlaceSheet({
   data,
   update,
   onClose,
+  onJournal,
 }: {
   place: Place;
   data: TravelData;
   update: (fn: (d: TravelData) => TravelData) => void;
   onClose: () => void;
+  onJournal?:()=>void;
 }) {
-  const t = messages[data.preferences.language],
+  const t = {...messages[data.preferences.language],...collaborationMessages[data.preferences.language]},
     lang = data.preferences.language;
   const custom = data.appearances.find(
     (a) => a.placeId === place.id,
@@ -68,6 +73,7 @@ export default function PlaceSheet({
         />
         <span className="switch" aria-hidden="true" />
       </label>
+      <label className="status-picker">{t.status}<select aria-label={t.status} value={statusFor(data,place.id)} onChange={e=>update(d=>setStatus(d,place,e.target.value as import('../collaboration/types').TravelStatus))}>{(['unvisited','wishlist','visited','lived'] as const).map(status=><option key={status} value={status}>{t[status]}</option>)}</select></label>
       {derived && <p className="derived-note">{t.derived}</p>}
       <div className="color-section">
         <h3>{t.color}</h3>
@@ -104,6 +110,7 @@ export default function PlaceSheet({
           {t.resetColor}
         </button>
       </div>
+      {onJournal&&<button className="button journal-shortcut" onClick={onJournal}>{t.addEntry} · {(data.entries||[]).filter(e=>e.place_id===place.id&&!e.deleted).length}</button>}
       <p className="muted small">{t.savedAuto}</p>
       <button className="button primary full" onClick={onClose}>
         {t.saveClose}

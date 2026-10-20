@@ -30,10 +30,11 @@ import {cloud} from "./collaboration/cloud";
 import ComparisonControls from "./collaboration/ComparisonControls";
 import ReadOnlyPlace from "./collaboration/ReadOnlyPlace";
 import {pairStatistics,viewColor} from "./collaboration/model";
+import JournalPanel from "./collaboration/JournalPanel";
 import type {ViewMode} from "./collaboration/types";
 import { messages } from "./data/i18n";
 import { searchPlaces, placesFor } from "./data/catalog";
-import { colorFor, isVisited, statistics } from "./services/travel";
+import { colorFor, isVisited, statistics,statusFor } from "./services/travel";
 import type { MapMode, Place } from "./types";
 type Page = "map" | "places" | "statistics" | "settings" | "friends" | "journal";
 export default function App() {
@@ -41,6 +42,8 @@ export default function App() {
   const { data, error, saving, update, retry, replace } = account;
   const shared=useFriends(account.session?.user.id);
   const [profileOpen,setProfileOpen]=useState(false);
+  const [journalPlace,setJournalPlace]=useState<Place>();
+  const [statusFilter,setStatusFilter]=useState("all");
   const [view,setView]=useState<ViewMode>("mine");
   useEffect(()=>{setView("mine");setSelected(undefined)},[account.session?.user.id,shared.selectedId]);
   useEffect(()=>{if(!shared.friendData&&view!=="mine"){setView("mine");setSelected(undefined)}},[shared.friendData,view]);
@@ -92,7 +95,7 @@ export default function App() {
   const viewCount=view==='mine'?pair.mine:view==='friend'?pair.friend:pair.both;
   const visibleVisited=(id:string)=>view==='mine'?isVisited(data,id):view==='friend'?!!shared.friendData&&isVisited(shared.friendData,id):view==='both'?!!shared.friendData&&isVisited(data,id)&&isVisited(shared.friendData,id):isVisited(data,id)||!!shared.friendData&&isVisited(shared.friendData,id);
   const results = searchPlaces(query, mode).filter(
-    (p) => page !== "places" || !onlyVisited || isVisited(data, p.id),
+    (p) => page !== "places" || ((!onlyVisited || isVisited(data,p.id))&&(statusFilter==='all'||statusFor(data,p.id)===statusFilter)),
   );
   function switchMode(next: MapMode) {
     setMode(next);
@@ -283,7 +286,7 @@ export default function App() {
                   />
                   {t.visited}
                   <i className="neutral" />
-                  {t.unvisited}
+                  {t.unvisited}<i style={{background:'#d5ba79'}}/>{t.wishlist}<i style={{background:'#aa9bc1'}}/>{t.lived}
                 </span>
                 <small>{t.mapHint}</small>
               </div>
@@ -354,11 +357,12 @@ export default function App() {
               <div className="places-toolbar">
                 {modes}
                 {search}
+                <select aria-label={t.status} value={statusFilter} onChange={e=>{setStatusFilter(e.target.value);setOnlyVisited(false)}}><option value="all">{t.allStatuses}</option>{(['wishlist','visited','lived','unvisited'] as const).map(status=><option key={status} value={status}>{t[status]}</option>)}</select>
                 <label className="filter-label">
                   <input
                     type="checkbox"
                     checked={onlyVisited}
-                    onChange={(e) => setOnlyVisited(e.target.checked)}
+                    onChange={(e) => {setOnlyVisited(e.target.checked);setStatusFilter('all')}}
                   />
                   {t.onlyVisited}
                 </label>
@@ -435,6 +439,7 @@ export default function App() {
                 );
               })}
             </section>
+            <section className="content-card wishlist-stats"><h3>{t.myWishlist}</h3>{(['world','china'] as const).map(m=><p key={m}>{m==='world'?t.countries:t.regions}: <strong>{pairStatistics(data,undefined,m).wishlist}</strong></p>)}</section>
             <p className="muted small stats-note">{t.statNote} {t.sharedNote}</p>
             {shared.friendData&&<section className="content-card"><h3>{data.profile.displayName} + {shared.friendData.profile.displayName}</h3>{(['world','china'] as const).map(m=>{const p=pairStatistics(data,shared.friendData,m);return <div className="pair-stats" key={m}><h4>{m==='world'?t.countries:t.regions} / {p.total}</h4>{[[t.myMap,p.mine],[t.friendMap,p.friend],[t.bothVisited,p.both],[t.mineOnly,p.onlyMine],[t.friendOnly,p.onlyFriend],[t.myWishlist,p.wishlist],[t.friendWishlist,p.friendWishlist]].map(([label,n])=><p key={label}><span>{label}</span><strong>{n}</strong></p>)}</div>})}</section>}
             <section className="content-card">
@@ -472,7 +477,7 @@ export default function App() {
           </>
         )}
         {page==='friends'&&<FriendsPanel userId={account.session?.user.id} language={lang} shared={shared} onSignIn={()=>setPage('settings')}/>}
-        {page==='journal'&&<section className="content-card"><h3>{t.journal}</h3><p>{t.privateJournal}</p></section>}
+        {page==='journal'&&<JournalPanel data={data} onSave={account.saveEntry} startPlace={journalPlace} onStartHandled={()=>setJournalPlace(undefined)}/>}
         {page === "settings" && (
           <>
             <section className="page-heading">
@@ -622,6 +627,7 @@ export default function App() {
           place={selected}
           data={data}
           update={update}
+          onJournal={()=>{setJournalPlace(selected);setSelected(undefined);setPage('journal')}}
           onClose={() => setSelected(undefined)}
         />
       )}
